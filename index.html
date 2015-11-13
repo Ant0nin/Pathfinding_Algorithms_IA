@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <head>
 	<script type="text/javascript" src="js/lib/canvasengine-1.3.2.all.min.js"></script>
-	<script type="text/javascript" src="main.js"></script>
+	
+	<!-- Classes -->
+	<script type="text/javascript" src="js/Map.js"></script>
+	
 </head>
 <body>
+	<form>
+		<label for="level">Choix du niveau :</label>
+		<input id="levelSelector" type="file" name="level"/>
+		<input id="loadLevelButton" type="button" value="Charger"/>
+	</form>
 	<canvas id="screen"></canvas>
+	
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
