@@ -3,7 +3,7 @@
 
 #include "Controller.h"
 
-class Meilleurdabord {
+class Noeud {
 
 public:
 	Noeud();

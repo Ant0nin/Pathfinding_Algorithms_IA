@@ -1,6 +1,5 @@
 #include "Meilleurdabord.h"
-#include <SDL2\SDL.h>
-#include <string>
+
 
 using namespace std;
 
@@ -8,13 +7,13 @@ Meilleurdabord::Meilleurdabord(Noeud etatinitial, Operateur op) {
 
 
 
-	Pile pile = new Pile();
+	Pile pile = Pile();
 
 	pile.insert(etatinitial, etatinitial.heurist);
 
 	while (pile.lentgh != 0) {
 
-		curNoeud = pile.pick();
+		Noeud curNoeud = pile.pick();
 
 		if (curNoeud.sucesseur == 0) {//test but ?
 			return curNoeud;
