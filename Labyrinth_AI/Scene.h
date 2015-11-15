@@ -16,7 +16,7 @@ private:
 	Character *character;
 
 public:
-	Scene(Terrain terrain, Character character)
+	Scene(Terrain *terrain, Character *character);
 	void render();
 
 };

@@ -6,6 +6,6 @@
 struct Terrain {
 	Tile *tiles;
 	SDL_Point startPosition;
-	Uint16 terrain_width;
-	Uint16 terrain_height;
+	Uint16 width;
+	Uint16 height;
 };

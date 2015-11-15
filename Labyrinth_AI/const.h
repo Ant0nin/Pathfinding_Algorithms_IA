@@ -5,6 +5,6 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-#define LEVEL_FILENAME "001.txt"
+#define LEVEL_NUMBER 001
 #define SPRITESHEET_FILE "terrain.bmp"
 

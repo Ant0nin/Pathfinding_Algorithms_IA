@@ -1,37 +1,55 @@
 #include "TerrainFactory.h"
+#include "Tile.h"
 #include <SDL2\SDL.h>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
-TerrainFactory::TerrainFactory(Uint16 levelNumber)
+#define READ_NEXT_LINE	getline(file, line); \
+						numericalValue = stoi(line, NULL, 10);
+
+TerrainFactory::TerrainFactory(Uint8 levelNumber)
 {
-	strcat(this->terrainFilename, "res/lvl/");
-	strcat(this->terrainFilename, SDL_itoa(levelNumber, NULL, 10));
-	strcat(this->terrainFilename, ".txt");
+	this->terrainFilename = "res/lvl/00" + std::to_string(levelNumber) + ".txt";
 }
 
 Terrain TerrainFactory::createTerrain() {
 	
-	FILE* file = fopen(this->terrainFilename, "r");
+	string line;
+	Uint16 numericalValue;
+	Terrain terrain;
+	SDL_Point startPosition;
+	ifstream file(this->terrainFilename);
 	
-	char input;
-	Uint16 line = 0;
+	// Lecture de la position de départ du personnage
+	READ_NEXT_LINE
+	startPosition.x = numericalValue;
+	READ_NEXT_LINE
+	startPosition.y = numericalValue;
+	terrain.startPosition = startPosition;
+	
+	// Lecture des dimensions du labyrinthe
+	READ_NEXT_LINE
+	terrain.width = numericalValue;
+	READ_NEXT_LINE
+	terrain.height = numericalValue;
 
-	while (true) {
-
-		input = fgetc(file);
-		if (input == '\n') {
-			switch (line) {
-				// TODO
-			}
-			line++;
+	// Construction des cases du terrain
+	Tile* terrainTiles;
+	terrainTiles = (Tile*)malloc(sizeof(Tile) * terrain.width * terrain.height);
+	for (Uint8 i = 0; i < terrain.height; i++)
+	{
+		getline(file, line);
+		for (Uint8 j = 0; j < terrain.width; j++) 
+		{
+			*terrainTiles = Tile(line[j] - 48); // 48 est la valeur décimale de 0 dans la table ASCII
+			terrainTiles++; // décalage d'une case vers la droite
 		}
-		else {
-
-		}
-
 	}
+	terrain.tiles = terrainTiles;
 
-	fclose(file);
+	file.close();
+
+	return terrain;
 }

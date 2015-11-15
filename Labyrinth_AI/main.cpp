@@ -1,5 +1,7 @@
 #include <SDL2\SDL.h>
 #include "TerrainFactory.h"
+#include "Character.h"
+#include "Scene.h"
 #include "const.h"
 
 #undef main
@@ -8,12 +10,15 @@ int main(int argc, int *argv) {
 
 	SDL_Init(SDL_INIT_VIDEO);
 
-	SDL_Window *window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	TerrainFactory *factory = new TerrainFactory(LEVEL_NUMBER);
+	Terrain terrain = factory->createTerrain();
 
-	Terrain terrain = new TerrainFactory(LEVEL_FILENAME)->createTerrain();
+	Character *character = new Character(&terrain.startPosition);
 
-	SDL_Delay(2000);
+	Scene *scene = new Scene(&terrain, character);
+	scene->render();
+
+	SDL_Delay(10000);
 
 	SDL_Quit();
 	return 0;
