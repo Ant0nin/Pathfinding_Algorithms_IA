@@ -7,6 +7,7 @@
 #include "Operateur.h"
 #include <SDL2\SDL.h>
 #include <string>
+#include <stdio.h>
 
 
 class Meilleurdabord {
