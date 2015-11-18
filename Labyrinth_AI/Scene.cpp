@@ -24,33 +24,34 @@ void Scene::render()
 	else
 		drawZone.w = (winHeight - winHeight % terrain->height) / terrain->height;
 	drawZone.h = drawZone.w;
-	drawZone.x = 0;
-	drawZone.y = 0;
 
 	// TODO : utiliser une spritesheet au lieu de fillRect
 	for (int i = 0; i < terrain->height; i++) {
+
+		drawZone.y = i * drawZone.h;
+
 		for (int j = 0; j < terrain->width; j++) {
 			
-			Tile tile = terrain->tiles[j + i * terrain->width];
+			drawZone.x = j * drawZone.w;
+
+			Tile tile = terrain->tiles[i * terrain->width + j];
 			
 			switch (tile) {
 				case FLOOR:
-					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // RED = sol
+					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // GREEN = sol
 					break;
 
 				case WALL:
-					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // GREEN = mur
+					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // RED = mur
 					break;
 
 				case EXIT:
-					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // BLUE = sortie
+					SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // BLUE = sortie
 					break;
 			}
 			SDL_RenderFillRect(renderer, &drawZone);
 
-			drawZone.x = j * drawZone.w;
 		}
-		drawZone.y = i * drawZone.h;
 	}
 
 	SDL_RenderPresent(renderer);
