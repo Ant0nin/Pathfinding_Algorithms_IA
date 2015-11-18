@@ -11,5 +11,6 @@ public:
 	bool valid();
 	bool isBut();
 	int heur, x, y;
+	Noeud node;
 
 };
