@@ -8,9 +8,9 @@ class Pile {
 
 public:
 	Pile();
-	int length;
-	void insert(Noeud n, int heur);
-
-private:
+	void empil(Noeud n);
+	Noeud depil();
+	void sort();
+	void join(Pile enf);
 	std::list<Noeud> pileNoeud;
 };
