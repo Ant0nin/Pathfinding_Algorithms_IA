@@ -13,4 +13,5 @@ public:
 	void sort();
 	void join(Pile enf);
 	std::list<Noeud*> pileNoeud;
+	bool comparHeur(const Noeud& first, const Noeud& second);
 };

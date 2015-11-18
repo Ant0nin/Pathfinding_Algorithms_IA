@@ -15,7 +15,7 @@ Pile::Pile() {
 void Pile::empil(Noeud* n) {
 	
 	std::list<int>::iterator it;
-	it = pileNoeud.begin;
+	it = &pileNoeud.begin;
 	pileNoeud.push_back(n);
 
 
@@ -23,7 +23,7 @@ void Pile::empil(Noeud* n) {
 
 Noeud* Pile::depil()
 {
-	return pileNoeud.pop_front;
+	return &pileNoeud.pop_front;
 }
 
 
@@ -33,9 +33,9 @@ void Pile::sort() {
 }
 
 
-bool comparHeur(const Noeud& first, const Noeud& second)
+bool comparHeur(const Noeud* first, const Noeud* second)
 {
-	return (first.heur < second.heur);
+	return (first->heur < second->heur);
 }
 
 void Pile::join(Pile listEnf) {
