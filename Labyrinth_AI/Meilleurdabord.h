@@ -13,6 +13,6 @@
 class Meilleurdabord {
 
 public :
-	Meilleurdabord(Noeud etatinitial, Operateur op);
+	Meilleurdabord(Noeud* etatinitial, Operateur op);
 	
 };

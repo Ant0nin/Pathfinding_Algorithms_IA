@@ -6,13 +6,13 @@
 
 Pile::Pile() {
 
-	pileNoeud = std::list<Noeud>();
+	pileNoeud = std::list<Noeud*>();
 
 }
 
 
 
-void Pile::empil(Noeud n) {
+void Pile::empil(Noeud* n) {
 	
 	std::list<int>::iterator it;
 	it = pileNoeud.begin;
@@ -21,7 +21,7 @@ void Pile::empil(Noeud n) {
 
 }
 
-Noeud Pile::depil()
+Noeud* Pile::depil()
 {
 	return pileNoeud.pop_front;
 }
@@ -30,7 +30,6 @@ Noeud Pile::depil()
 
 void Pile::sort() {
 	pileNoeud.sort(comparHeur);
-
 }
 
 
@@ -40,7 +39,6 @@ bool comparHeur(const Noeud& first, const Noeud& second)
 }
 
 void Pile::join(Pile listEnf) {
-
 
 	while (listEnf.pileNoeud.size != 0) {
 		pileNoeud.push_front(listEnf.pileNoeud.pop_back);

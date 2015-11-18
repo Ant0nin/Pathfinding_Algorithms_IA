@@ -8,9 +8,9 @@ class Pile {
 
 public:
 	Pile();
-	void empil(Noeud n);
-	Noeud depil();
+	void empil(Noeud* n);
+	Noeud* depil();
 	void sort();
 	void join(Pile enf);
-	std::list<Noeud> pileNoeud;
+	std::list<Noeud*> pileNoeud;
 };
