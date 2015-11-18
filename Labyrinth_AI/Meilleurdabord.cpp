@@ -8,30 +8,35 @@ Meilleurdabord::Meilleurdabord(Noeud etatinitial, Operateur op) {
 
 
 	Pile pile = Pile();
+	Noeud curNoeud;
+	pile.empil(etatinitial);
 
-	pile.insert(etatinitial, etatinitial.heurist);
+	while (pile.pileNoeud.size != 0) {
 
-	while (pile.lentgh != 0) {
+		curNoeud = pile.depil();
 
-		Noeud curNoeud = pile.pick();
-
-		if (curNoeud.sucesseur == 0) {//test but ?
-			return curNoeud;
+		if (curNoeud.isBut()) {
+			//return curNoeud;
+			break;
 		}
 
 		else {
-			listEnfant = [op.lentgh];
-			for (var i = 0; i<op.lentgh; i++) {
-				curNoeudEnfant = sucesseur(curNoeud, op[i]);
-				if (valide(curNoeudEnfant)) {
-					//pile.insert(curNoeudEnfant,heurist(curNoeudEnfant));
-					listEnfant.push(curNoeudEnfant);
+			Pile listEnfant = Pile();
+			//4 le nombre d'operateur
+			for (int i = 0; i<4; i++) {
+				Noeud curNoeudEnfant = curNoeud.sucesseur(op);
+				if (curNoeud.valid()) {
+					listEnfant.empil(curNoeudEnfant);
 				}
 			}
-			listEnfant.sort(triPile);
-			pile = pile.join(listEnfant);
+			listEnfant.sort();
+			pile.join(listEnfant);
 		}
 	}
+
+
+
+	printf(" Le noeud arrivé au but est : %i / %i", curNoeud.x, curNoeud.y);
 
 
 }
