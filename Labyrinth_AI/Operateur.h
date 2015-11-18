@@ -1,8 +1,9 @@
 #pragma once
 
 
-static enum Type {
-	WALL,
-	FLOOR,
-	EXIT
+static enum Operateur {
+	HAUT,
+	BAS,
+	GAUCHE,
+	DROITE
 };
