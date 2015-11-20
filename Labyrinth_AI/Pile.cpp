@@ -14,8 +14,7 @@ Pile::Pile() {
 
 void Pile::empil(Noeud* n) {
 	
-	std::list<int>::iterator it;
-	it = &pileNoeud.begin;
+	
 	pileNoeud.push_back(n);
 
 
@@ -45,5 +44,9 @@ void Pile::join(Pile listEnf) {
 	}
 
 
+}
+
+bool Pile::isIn(Noeud* noeud) {
+	return std::find(pileNoeud.begin(), pileNoeud.end(), &noeud) != pileNoeud.end();
 }
 

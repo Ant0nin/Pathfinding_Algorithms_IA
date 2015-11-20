@@ -23,10 +23,9 @@ Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain *terra
 			Pile listEnfant = Pile();
 			//4 le nombre d'operateur
 			for (int i = 0; i<4; i++) {
-				Noeud curNoeudEnfant = curNoeud->sucesseur(op);
+				Noeud* curNoeudEnfant = &curNoeud->sucesseur(*op);
 				if (curNoeud->valid()) {
-					listEnfant.empil(&curNoeudEnfant);
-					
+					listEnfant.empil(curNoeudEnfant);
 				}
 			}
 			listEnfant.sort();

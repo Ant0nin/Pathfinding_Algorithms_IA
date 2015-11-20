@@ -13,7 +13,7 @@ Noeud::Noeud(int newX,int newY,Noeud* pere)
 
 }
 
-Noeud Noeud::sucesseur(Operateur op)
+Noeud* Noeud::sucesseur(Operateur op)
 {
 	int newX = x;
 	int newY = y;
