@@ -2,21 +2,23 @@
 
 
 #include "Controller.h"
-#include "Operateur.h"
+#include "Direction.h"
 #include <cmath>
+#include <SDL2\SDL.h>
 
 
 class Noeud {
 
 public:
 	Noeud(int x,int y,Noeud* pere);
-	Noeud sucesseur(Operateur op);
+	Noeud sucesseur(Direction op);
 	bool valid();
 	bool isBut();
 	Noeud* getPopa();
 	int calcHeur();
 
-	int heur, x, y;
+	int heur;
+	SDL_Point pos;
 
 
 

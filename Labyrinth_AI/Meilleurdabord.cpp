@@ -3,17 +3,17 @@
 
 using namespace std;
 
-Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Operateur op) {
-
-
+Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain *terrain) {
 
 	Pile pile = Pile();
 	Noeud* curNoeud;
 	pile.empil(etatinitial);
+	Pile solution = Pile();
 
 	while (pile.pileNoeud.size != 0) {
 
 		curNoeud = pile.depil();
+		solution.empil(curNoeud);
 
 		if (curNoeud->isBut()) {
 			//return curNoeud;
@@ -26,6 +26,7 @@ Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Operateur op) {
 				Noeud curNoeudEnfant = curNoeud->sucesseur(op);
 				if (curNoeud->valid()) {
 					listEnfant.empil(&curNoeudEnfant);
+					
 				}
 			}
 			listEnfant.sort();
@@ -39,5 +40,7 @@ Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Operateur op) {
 
 
 }
+
+
 
 

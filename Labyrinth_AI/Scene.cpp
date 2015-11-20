@@ -7,10 +7,15 @@ Scene::Scene(Terrain *terrain, Character *character)
 	this->window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	// TODO : load spritesheet
-
 	this->terrain = terrain;
 	this->character = character;
+
+	initTextures();
+}
+
+void Scene::initTextures()
+{
+	// TODO :
 }
 
 void Scene::render()

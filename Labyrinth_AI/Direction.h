@@ -1,7 +1,7 @@
 #pragma once
 
 
-static enum Operateur {
+static enum Direction {
 	HAUT,
 	BAS,
 	GAUCHE,

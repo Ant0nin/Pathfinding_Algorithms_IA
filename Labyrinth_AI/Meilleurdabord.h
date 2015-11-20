@@ -1,18 +1,21 @@
 #pragma once
 
-
 #include "Controller.h"
+#include "Direction.h"
+#include "Terrain.h"
 #include "Noeud.h"
 #include "Pile.h"
-#include "Operateur.h"
+
 #include <SDL2\SDL.h>
 #include <string>
 #include <stdio.h>
 
-
-class Meilleurdabord {
+class Meilleurdabord : public Controller {
 
 public :
-	Meilleurdabord(Noeud* etatinitial, Operateur op);
+	Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain *terrain);
+private :
+	bool isValid(SDL_Point *pos);
+	bool isBut(SDL_Point *pos);
 	
 };
