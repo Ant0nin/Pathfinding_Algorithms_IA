@@ -2,7 +2,7 @@
 
 using namespace std;
 
-AEtoile::AEtoile(Noeud* etatinitial, Operateur op) {
+AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
 
 
 
@@ -18,7 +18,7 @@ AEtoile::AEtoile(Noeud* etatinitial, Operateur op) {
 		noeudInexplo.empil(curNoeud);
 
 
-		if (curNoeud->isBut()) {
+		/*if (curNoeud->isBut()) {
 			//return curNoeud;
 			break;
 		}
@@ -41,12 +41,12 @@ AEtoile::AEtoile(Noeud* etatinitial, Operateur op) {
 			}
 			//listEnfant.sort();
 			//pile.join(listEnfant);
-		}
+		}*/
 	}
 
 
 
-	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->x, curNoeud->y);
+	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->pos.x, curNoeud->pos.y);
 
 
 }

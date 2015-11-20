@@ -11,16 +11,11 @@ class Noeud {
 
 public:
 	Noeud(int x,int y,Noeud* pere);
-	Noeud sucesseur(Direction op);
-	bool valid();
-	bool isBut();
+	Noeud* sucesseur(Direction op);
 	Noeud* getPopa();
 	int calcHeur();
 
 	int heur;
 	SDL_Point pos;
-
-
-
-
+	
 };

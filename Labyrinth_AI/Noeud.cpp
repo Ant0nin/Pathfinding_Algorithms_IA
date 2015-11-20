@@ -5,51 +5,34 @@ Noeud* popa;
 
 Noeud::Noeud(int newX,int newY,Noeud* pere)
 {
-
-	x = newX;
-	y = newY;
+	pos = SDL_Point();
+	pos.x = newX;
+	pos.y = newY;
 	popa = pere;
 	heur = calcHeur();
 
 }
 
-Noeud* Noeud::sucesseur(Operateur op)
+Noeud* Noeud::sucesseur(Direction op)
 {
-	int newX = x;
-	int newY = y;
+	int newX = pos.x;
+	int newY = pos.y;
 	switch (op)
 	{
 	case HAUT:
-		y--;
+		newY--;
 		break;
 	case BAS:
-		y++;
+		newY++;
 		break;
 	case GAUCHE:
-		x--;
+		newX--;
 		break;
 	case DROITE:
-		x++;
+		newX++;
 		break;
 	}
-	return Noeud(newX,newY,this);
-}
-
-bool Noeud::valid()
-{
-	bool ret = true;
-
-	//Si le terrain [x][y] est un mur 1
-	if (true) ret= false;
-	return ret;
-}
-
-bool Noeud::isBut()
-{
-	bool ret = false;
-	//Si le terrain [x][y] est la sortie -1
-	if (true) ret = true;
-	return ret;
+	return &Noeud(newX,newY,this);
 }
 
 Noeud* Noeud::getPopa()
@@ -59,6 +42,6 @@ Noeud* Noeud::getPopa()
 
 int Noeud::calcHeur()
 {
-	float ret = sqrt(pow(x - 1,2) + pow(y - 1,2));
+	float ret = sqrt(pow(pos.x - 1,2) + pow(pos.y - 1,2));
 	return ret;
 }
