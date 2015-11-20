@@ -10,7 +10,7 @@ class Noeud {
 
 public:
 	Noeud(int x,int y,Noeud* pere);
-	Noeud sucesseur(Operateur op);
+	Noeud* sucesseur(Operateur op);
 	bool valid();
 	bool isBut();
 	Noeud* getPopa();

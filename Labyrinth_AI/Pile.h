@@ -14,4 +14,5 @@ public:
 	void join(Pile enf);
 	std::list<Noeud*> pileNoeud;
 	bool comparHeur(const Noeud& first, const Noeud& second);
+	bool isIn(Noeud* noeud);
 };
