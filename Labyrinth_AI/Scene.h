@@ -15,6 +15,7 @@ private:
 	SDL_Texture *texture_fg;
 	SDL_Texture *spritesheet_character;
 	SDL_Texture *texture_floor_unit;
+	SDL_Texture *texture_exit_unit;
 
 	Terrain *terrain;
 	Character *character;

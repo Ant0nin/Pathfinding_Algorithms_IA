@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "const.h"
 #include <SDL2\SDL.h>
+#include <SDL2\SDL_image.h>
 
 Scene::Scene(Terrain *terrain, Character *character)
 {
@@ -15,7 +16,24 @@ Scene::Scene(Terrain *terrain, Character *character)
 
 void Scene::initTextures()
 {
-	// TODO :
+	SDL_Surface *buffer;
+	
+	buffer = IMG_Load(TEXTURE_BACKGROUND);
+	this->texture_bg = SDL_CreateTextureFromSurface(this->renderer, buffer);
+
+	buffer = IMG_Load(TEXTURE_FOREGROUND);
+	this->texture_fg = SDL_CreateTextureFromSurface(this->renderer, buffer);
+
+	buffer = IMG_Load(TEXTURE_FLOOR_UNIT);
+	this->texture_floor_unit = SDL_CreateTextureFromSurface(this->renderer, buffer);
+
+	buffer = IMG_Load(TEXTURE_EXIT_UNIT);
+	this->texture_exit_unit = SDL_CreateTextureFromSurface(this->renderer, buffer);
+
+	buffer = IMG_Load(SPRITESHEET_CHARACTER);
+	this->spritesheet_character = SDL_CreateTextureFromSurface(this->renderer, buffer);
+
+	SDL_free(buffer);
 }
 
 void Scene::render()
@@ -24,13 +42,18 @@ void Scene::render()
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
 	SDL_Rect drawZone;
 
+	drawZone.x = 0;
+	drawZone.y = 0;
+	drawZone.w = winWidth;
+	drawZone.h = winHeight;
+	SDL_RenderCopy(renderer, texture_bg, NULL, &drawZone);
+
 	if (winWidth <= winHeight)
 		drawZone.w = (winWidth - winWidth % terrain->width) / terrain->width;
 	else
 		drawZone.w = (winHeight - winHeight % terrain->height) / terrain->height;
 	drawZone.h = drawZone.w;
 
-	// TODO : utiliser une spritesheet au lieu de fillRect
 	for (int i = 0; i < terrain->height; i++) {
 
 		drawZone.y = i * drawZone.h;
@@ -43,21 +66,22 @@ void Scene::render()
 			
 			switch (tile) {
 				case FLOOR:
-					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // GREEN = sol
-					break;
-
-				case WALL:
-					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // RED = mur
+					SDL_RenderCopy(renderer, texture_floor_unit, NULL, &drawZone);
 					break;
 
 				case EXIT:
-					SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // BLUE = sortie
+					SDL_RenderCopy(renderer, texture_exit_unit, NULL, &drawZone);
 					break;
 			}
-			SDL_RenderFillRect(renderer, &drawZone);
 
 		}
 	}
+
+	/*drawZone.x = 0;
+	drawZone.y = 0;
+	drawZone.w = winWidth;
+	drawZone.h = winHeight;
+	SDL_RenderCopy(renderer, texture_fg, NULL, &drawZone);*/
 
 	SDL_RenderPresent(renderer);
 }
