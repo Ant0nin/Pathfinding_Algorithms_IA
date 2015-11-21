@@ -20,8 +20,5 @@ public:
 
 	int heur;
 	SDL_Point pos;
-
-
-
-
+	
 };

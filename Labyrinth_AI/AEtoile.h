@@ -13,6 +13,5 @@
 class AEtoile : public Controller {
 
 public:
-	AEtoile(SDL_Point *characterPosition, Terrain *terrain);
-
+	AEtoile(SDL_Point *characterPosition, Terrain *terrain, std::list<Direction> *op);
 };
