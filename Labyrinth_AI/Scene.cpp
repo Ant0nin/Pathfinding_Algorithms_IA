@@ -2,8 +2,10 @@
 #include "const.h"
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_image.h>
+#include <SDL2\SDL_ttf.h>
+#include <string>
 
-Scene::Scene(Terrain *terrain, Character *character)
+Scene::Scene(Terrain *terrain, Character *character, ControlPanel *panel)
 {
 	this->window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -20,9 +22,6 @@ void Scene::initTextures()
 	
 	buffer = IMG_Load(TEXTURE_BACKGROUND);
 	this->texture_bg = SDL_CreateTextureFromSurface(this->renderer, buffer);
-
-	buffer = IMG_Load(TEXTURE_FOREGROUND);
-	this->texture_fg = SDL_CreateTextureFromSurface(this->renderer, buffer);
 
 	buffer = IMG_Load(TEXTURE_FLOOR_UNIT);
 	this->texture_floor_unit = SDL_CreateTextureFromSurface(this->renderer, buffer);
@@ -77,11 +76,15 @@ void Scene::render()
 		}
 	}
 
-	/*drawZone.x = 0;
-	drawZone.y = 0;
-	drawZone.w = winWidth;
-	drawZone.h = winHeight;
-	SDL_RenderCopy(renderer, texture_fg, NULL, &drawZone);*/
+	// TODO : Afficher nom de l'algorithme et ses stats si il est executed
+	//string controllerName = controlPanel->getCurrentController()->getName();
 
 	SDL_RenderPresent(renderer);
+}
+
+void Scene::render(ExecutionResult * algoResult)
+{
+	this->render;
+
+	// TODO : Afficher les chemins et temps d'execution
 }

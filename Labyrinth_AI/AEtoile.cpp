@@ -2,7 +2,7 @@
 
 using namespace std;
 
-AEtoile::AEtoile(Noeud* etatinitial, Operateur op) {
+AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
 
 
 

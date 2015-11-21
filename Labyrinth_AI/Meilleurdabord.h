@@ -13,7 +13,7 @@
 class Meilleurdabord : public Controller {
 
 public :
-	Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain *terrain);
+	Meilleurdabord(SDL_Point *characterPosition, Terrain *terrain);
 private :
 	bool isValid(SDL_Point *pos);
 	bool isBut(SDL_Point *pos);

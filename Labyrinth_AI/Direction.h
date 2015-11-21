@@ -1,7 +1,7 @@
 #pragma once
 
 
-static enum Direction {
+enum Direction {
 	HAUT,
 	BAS,
 	GAUCHE,

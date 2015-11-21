@@ -3,17 +3,16 @@
 
 Noeud* popa;
 
-Noeud::Noeud(int newX,int newY,Noeud* pere)
+Noeud::Noeud(SDL_Point pos,Noeud* pere)
 {
 
-	x = newX;
-	y = newY;
+	this->pos = pos;
 	popa = pere;
 	heur = calcHeur();
 
 }
 
-Noeud* Noeud::sucesseur(Operateur op)
+Noeud* Noeud::sucesseur(Direction op)
 {
 	int newX = x;
 	int newY = y;

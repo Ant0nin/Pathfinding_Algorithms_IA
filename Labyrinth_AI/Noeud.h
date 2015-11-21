@@ -10,7 +10,8 @@
 class Noeud {
 
 public:
-	Noeud(int x,int y,Noeud* pere);
+	Noeud(SDL_Point pos);
+	Noeud(SDL_Point pos,Noeud* pere);
 	Noeud sucesseur(Direction op);
 	bool valid();
 	bool isBut();

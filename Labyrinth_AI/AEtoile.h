@@ -4,15 +4,15 @@
 #include "Controller.h"
 #include "Noeud.h"
 #include "Pile.h"
-#include "Operateur.h"
+#include "Direction.h"
 #include <SDL2\SDL.h>
 #include <string>
 #include <stdio.h>
 
 
-class AEtoile {
+class AEtoile : public Controller {
 
 public:
-	AEtoile(Noeud* etatinitial, Operateur op);
+	AEtoile(SDL_Point *characterPosition, Terrain *terrain);
 
 };

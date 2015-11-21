@@ -5,6 +5,8 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+#define CONTROLPANEL_RATIO 3
+
 #define TEXTURE_BACKGROUND		"res/tex/bg_water.png"
 #define TEXTURE_FOREGROUND		"res/tex/fg_grass.png"
 #define SPRITESHEET_CHARACTER	"res/tex/frog.png"
