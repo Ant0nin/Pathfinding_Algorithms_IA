@@ -6,3 +6,4 @@
 struct Character {
 	SDL_Point *position;
 };
+typedef Character Character;

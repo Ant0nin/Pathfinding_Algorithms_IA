@@ -1,15 +1,20 @@
 #include "Controller.h"
-#include <string>
+#include "ControllerInfo.h"
 
-Controller::Controller(std::string name, SDL_Point * characterPos, Terrain * terrain, std::list<Direction>* op)
+Controller::Controller(const char name[], SDL_Point * characterPos, Terrain * terrain, std::list<Direction>* op)
 {
-	this->name = name;
+	info.controllerName = name;
 	this->characterPos = characterPos;
 	this->terrain = terrain;
 	this->op = op;
 }
 
-std::string Controller::getName()
+ControllerInfo * Controller::getInfo()
 {
-	return this->name;
+	return &info;
+}
+
+void Controller::reset()
+{
+	// TODO
 }

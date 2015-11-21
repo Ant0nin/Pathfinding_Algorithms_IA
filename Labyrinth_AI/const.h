@@ -5,7 +5,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-#define CONTROLPANEL_RATIO 3
+#define FONT_GENERAL			"res/font/imagine_font.ttf"
 
 #define TEXTURE_BACKGROUND		"res/tex/bg_water.png"
 #define TEXTURE_FOREGROUND		"res/tex/fg_grass.png"

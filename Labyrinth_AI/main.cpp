@@ -1,9 +1,13 @@
 #include <SDL2\SDL.h>
+#include <SDL2\SDL_ttf.h>
+#include <SDL2\SDL_image.h>
 
 #include "TerrainFactory.h"
 #include "Character.h"
 #include "Scene.h"
 #include "InputListener.h"
+#include "Controller.h"
+#include "ControllerSelector.h"
 
 #include "const.h"
 #include <list>
@@ -11,11 +15,13 @@
 #include "Meilleurdabord.h"
 #include "AEtoile.h"
 #include "CoutsUniform.h"
+#include "main.h"
 
 #undef main
 
 int main(int argc, int *argv) {
 
+	TTF_Init();
 	SDL_Init(SDL_INIT_VIDEO);
 
 	TerrainFactory *factory = new TerrainFactory(LEVEL_NUMBER);
@@ -33,20 +39,17 @@ int main(int argc, int *argv) {
 
 	// Liste des controllers (algorithmes IA)
 	std::list<Controller*> controllers;
-	controllers.push_back(new Meilleurdabord(character.position, terrain, op));
-	controllers.push_back(new AEtoile(character.position, terrain, op));
-	controllers.push_back(new CoutsUniform(character.position, terrain, op));
+	controllers.push_back(new Meilleurdabord(character.position, terrain, &op));
+	ControllerSelector *selector = new ControllerSelector(controllers);
 
-	ControlPanel *controlPanel = new ControlPanel(controllers);
-
-	Scene *scene = new Scene(terrain, &character, controlPanel);
+	Scene *scene = new Scene(terrain, &character, selector);
 	scene->render();
 
-	InputListener *listener = new InputListener(controlPanel, scene);
+	InputListener *listener = new InputListener(scene, selector);
 	listener->run();
 
-	SDL_Delay(10000); // TODO : retirer
-
 	SDL_Quit();
+	TTF_Quit();
+
 	return EXIT_SUCCESS;
 }

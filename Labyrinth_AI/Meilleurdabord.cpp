@@ -1,9 +1,10 @@
 #include "Meilleurdabord.h"
-
+#include "Controller.h"
+#include <string>
 
 using namespace std;
 
-Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain * ter) {
+/*Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain * ter) {
 	terrain = ter;
 	Pile pile = Pile();
 	Noeud* curNoeud;
@@ -32,22 +33,35 @@ Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain * ter)
 		}
 	}
 	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->pos.x, curNoeud->pos.y);
+}*/
+
+Meilleurdabord::Meilleurdabord(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction> * op)
+	: Controller("Best first", characterPosition, terrain, op)
+{
 }
 
 bool Meilleurdabord::isValid(SDL_Point* pos)
 {
-	bool ret = true;
+	/*bool ret = true;
 	//TODO : Antonin verifie si la condition est bonne
 	if (*terrain->tiles+ (sizeof(Tile)*pos->x) + (terrain->width*pos->y) == WALL) ret = false;
-	return ret;
+	return ret;*/
+	return true;
 }
 
 bool Meilleurdabord::isBut(SDL_Point* pos)
 {
-	bool ret = false;
+	/*bool ret = false;
 	//TODO : Antonin verifie si la condition est bonne
 	if (*terrain->tiles + (sizeof(Tile)*pos->x) + (terrain->width*pos->y) == EXIT) ret = false;
-	return ret;
+	return ret;*/
+
+	return true;
+}
+
+void Meilleurdabord::execute()
+{
+	// TODO
 }
 
 

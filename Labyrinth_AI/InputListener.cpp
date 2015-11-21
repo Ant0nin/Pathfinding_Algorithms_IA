@@ -1,11 +1,11 @@
 #include "InputListener.h"
-#include "ExecutionResult.h"
 #include <SDL2\SDL.h>
+#include <SDL2\SDL_ttf.h>
 
-InputListener::InputListener(Scene * scene, ControlPanel * panel)
+InputListener::InputListener(Scene * scene, ControllerSelector * selector)
 {
 	this->scene = scene;
-	this->controlPanel = panel;
+	this->selector = selector;
 }
 
 InputListener::~InputListener()
@@ -15,38 +15,42 @@ InputListener::~InputListener()
 
 void InputListener::run()
 {
-	ExecutionResult algoResult;
-
+	Controller* activeController = selector->getCurrentController();
 	SDL_Event event;
-	while (SDL_PollEvent(&event)) {
 
-		switch (event.type) {
+	while (1) {
+
+		while (SDL_WaitEvent(&event)) {
+
+			switch (event.type) {
+
 			case SDL_KEYDOWN:
 
-			switch (event.key.keysym.sym) {
+				switch (event.key.keysym.sym) {
 
 				case SDLK_DOWN: // Flèche bas
-					controlPanel->selectNextController();
+					activeController = selector->selectNextController();
 					scene->render();
 					break;
 
 				case SDLK_UP: // Flèche haut
-					controlPanel->selectPreviousController();
+					activeController = selector->selectPreviousController();
 					scene->render();
 					break;
 
 				case SDLK_RETURN: // Touche entrée
-					algoResult = controlPanel->getCurrentController()->execute();
-					scene->render(&algoResult);
+					activeController->execute();
+					scene->render();
 					break;
 
 				case SDLK_ESCAPE: // Touche echap
-					SDL_Quit();
-					exit(EXIT_SUCCESS);
-					break;
+					return;
 				}
 
-			break;
+				break;
+			}
+
 		}
+
 	}
 }

@@ -9,3 +9,4 @@ struct Terrain {
 	Uint16 width;
 	Uint16 height;
 };
+typedef Terrain Terrain;

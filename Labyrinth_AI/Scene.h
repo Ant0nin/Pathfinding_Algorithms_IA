@@ -1,10 +1,11 @@
 #pragma once
 
 #include <SDL2\SDL.h>
+#include <SDL2\SDL_ttf.h>
 #include "Terrain.h"
 #include "Character.h"
-#include "ControlPanel.h"
-#include "ExecutionResult.h"
+#include "Controller.h"
+#include "ControllerSelector.h"
 
 class Scene {
 
@@ -17,15 +18,22 @@ private:
 	SDL_Texture *spritesheet_character;
 	SDL_Texture *texture_floor_unit;
 	SDL_Texture *texture_exit_unit;
+	SDL_Texture *texture_console;
 
 	Terrain *terrain;
 	Character *character;
 
+	ControllerSelector *selector;
+	TTF_Font *font;
+
 	void initTextures();
 
-public:
-	Scene(Terrain *terrain, Character *character, ControlPanel *panel);
-	void render();
-	void render(ExecutionResult *algoResult);
+	void prepareConsole(int winWidth, int winHeight);
+	void prepareMap(int winWidth, int winHeight);
+	void preparePathTrace(int winWidth, int winHeight);
 
+public:
+	Scene(Terrain *terrain, Character *character, ControllerSelector *selector);
+	~Scene();
+	void render();
 };

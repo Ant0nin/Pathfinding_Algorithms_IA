@@ -1,15 +1,15 @@
 #pragma once
 
-#include "ControlPanel.h"
+#include "ControllerSelector.h"
 #include "Scene.h"
 
 class InputListener
 {
 private:
 	Scene *scene;
-	ControlPanel *controlPanel;
+	ControllerSelector *selector;
 public:
-	InputListener(Scene *scene, ControlPanel *panel);
+	InputListener(Scene *scene, ControllerSelector *selector);
 	~InputListener();
 	void run();
 };

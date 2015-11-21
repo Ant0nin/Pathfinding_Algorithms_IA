@@ -13,9 +13,10 @@
 class Meilleurdabord : public Controller {
 
 public :
-	Meilleurdabord(SDL_Point *characterPosition, Terrain *terrain);
+	Meilleurdabord(SDL_Point *characterPosition, Terrain *terrain, std::list<Direction> *op);
+	virtual void execute() override;
+
 private :
 	bool isValid(SDL_Point *pos);
 	bool isBut(SDL_Point *pos);
-	
 };

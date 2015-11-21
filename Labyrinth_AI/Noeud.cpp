@@ -11,7 +11,7 @@ Noeud::Noeud(SDL_Point pos,Noeud* pere)
 
 }
 
-Noeud* Noeud::sucesseur(Direction op)
+/*Noeud* Noeud::sucesseur(Direction op)
 {
 	int newX = pos.x;
 	int newY = pos.y;
@@ -31,7 +31,7 @@ Noeud* Noeud::sucesseur(Direction op)
 		break;
 	}
 	return &Noeud(newX,newY,this);
-}
+}*/
 
 Noeud* Noeud::getPopa()
 {
