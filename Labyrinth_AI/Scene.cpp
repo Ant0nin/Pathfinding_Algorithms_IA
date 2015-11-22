@@ -6,15 +6,23 @@
 #include <SDL2\SDL_ttf.h>
 #include <string>
 
+#define PRINT_TEXT \
+lineIndex++; \
+consoleZone.y = lineIndex * consoleZone.h; \
+this->texture_console = SDL_CreateTextureFromSurface(this->renderer, textSurface); \
+SDL_RenderCopy(renderer, texture_console, NULL, &consoleZone);
+
 Scene::Scene(Terrain *terrain, Character *character, ControllerSelector *selector)
 {
-	this->window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+	this->window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	this->terrain = terrain;
 	this->character = character;
 	this->selector = selector;
+
 	this->font = TTF_OpenFont(FONT_GENERAL, sizeof(FONT_GENERAL));
+	this->text_color = TEXT_COLOR_GENERAL;
 
 	initTextures();
 }
@@ -43,7 +51,7 @@ void Scene::initTextures()
 	SDL_free(buffer);
 }
 
-void Scene::prepareMap(int winWidth, int winHeight)
+void Scene::prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeight)
 {
 	SDL_Rect drawZone;
 
@@ -58,6 +66,9 @@ void Scene::prepareMap(int winWidth, int winHeight)
 	else
 		drawZone.w = (winHeight - winHeight % terrain->height) / terrain->height;
 	drawZone.h = drawZone.w;
+
+	*mapWidth = drawZone.w * terrain->width;
+	*mapHeight = drawZone.h * terrain->height;
 
 	// Affichage du terrain
 	for (int i = 0; i < terrain->height; i++) {
@@ -83,39 +94,49 @@ void Scene::prepareMap(int winWidth, int winHeight)
 	}
 }
 
-void Scene::prepareConsole(int winWidth, int winHeight)
+void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHeight)
 {
 	SDL_Rect consoleZone;
 	
 	if (winWidth <= winHeight) {
-		consoleZone.x = (winWidth - winWidth % terrain->width) / terrain->width;
-		consoleZone.w = winWidth - consoleZone.x;
-		consoleZone.y = 0;
+		consoleZone.x = 0;
+		consoleZone.y = winHeight - mapHeight;
+		consoleZone.w = winWidth;
+		consoleZone.h = winHeight - consoleZone.y;
 	}
 	else {
-		consoleZone.y = (winHeight - winHeight % terrain->height) / terrain->height;
-		consoleZone.w = winHeight - consoleZone.y;
-		consoleZone.x = 0;
+		consoleZone.x = winWidth - mapWidth;
+		consoleZone.y = 0;
+		consoleZone.w = winWidth - consoleZone.x;
+		consoleZone.h = winHeight;
 	}
-	consoleZone.h = consoleZone.w;
+
+	//SDL_RenderFillRect(renderer, &consoleZone);
 
 	ControllerInfo *info = selector->getCurrentController()->getInfo();
-	SDL_Surface *textSurface = nullptr; // TODO : gérer l'erreur
-	SDL_Color color = { 0,0,0 };
+	consoleZone.h = consoleZone.h / CONSOLE_LINE_QUANTITY;
+	SDL_Surface *textSurface = nullptr;
+	int lineIndex = 0;
+
+	textSurface = TTF_RenderText_Solid(font, info->controllerName, text_color);
+	PRINT_TEXT
 
 	switch (info->state) {
 
 	case IDLE:
-		textSurface = TTF_RenderText_Solid(font, info->controllerName, color);
+		textSurface = TTF_RenderText_Solid(font, "IDLE", text_color);
+		PRINT_TEXT
 		break;
 
 	case SUCCESS:
-		textSurface = TTF_RenderText_Solid(font, info->controllerName, color);
+		textSurface = TTF_RenderText_Solid(font, "SUCCESS", text_color);
+		PRINT_TEXT
 		// TODO : Afficher les chemins et temps d'execution
 		break;
 
 	case FAILED:
-		textSurface = TTF_RenderText_Solid(font, info->controllerName, color);
+		textSurface = TTF_RenderText_Solid(font, "FAILED", text_color);
+		PRINT_TEXT
 		// TODO : Afficher temps d'execution
 		break;
 
@@ -131,11 +152,11 @@ void Scene::preparePathTrace(int winWidth, int winHeight)
 
 void Scene::render()
 {
-	int winWidth, winHeight;
+	int winWidth, winHeight, mapWidth, mapHeight;
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
 
-	prepareMap(winWidth, winHeight);
-	prepareConsole(winWidth, winHeight);
+	prepareMap(winWidth, winHeight, &mapWidth, &mapHeight);
+	prepareConsole(winWidth, winHeight, mapWidth, mapHeight);
 	preparePathTrace(winWidth, winHeight);
 
 	SDL_RenderPresent(renderer);

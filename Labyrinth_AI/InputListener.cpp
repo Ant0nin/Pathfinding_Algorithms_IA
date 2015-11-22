@@ -24,6 +24,18 @@ void InputListener::run()
 
 			switch (event.type) {
 
+			case SDL_WINDOWEVENT:
+
+				switch (event.window.event) {
+				
+				case SDL_WINDOWEVENT_SIZE_CHANGED:
+					scene->render();
+					break;
+
+				case SDL_WINDOWEVENT_CLOSE:
+					return;
+				}
+
 			case SDL_KEYDOWN:
 
 				switch (event.key.keysym.sym) {

@@ -14,3 +14,6 @@
 #define TEXTURE_EXIT_UNIT		"res/tex/exit_unit.png"
 
 #define LEVEL_NUMBER 001
+
+#define CONSOLE_LINE_QUANTITY 20
+#define TEXT_COLOR_GENERAL { 0,0,0 }

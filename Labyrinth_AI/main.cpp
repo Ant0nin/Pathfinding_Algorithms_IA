@@ -15,7 +15,6 @@
 #include "Meilleurdabord.h"
 #include "AEtoile.h"
 #include "CoutsUniform.h"
-#include "main.h"
 
 #undef main
 
@@ -43,13 +42,15 @@ int main(int argc, int *argv) {
 	ControllerSelector *selector = new ControllerSelector(controllers);
 
 	Scene *scene = new Scene(terrain, &character, selector);
-	scene->render();
-
 	InputListener *listener = new InputListener(scene, selector);
+
+	scene->render();
 	listener->run();
 
 	SDL_Quit();
 	TTF_Quit();
+
+	// TODO : free resources
 
 	return EXIT_SUCCESS;
 }

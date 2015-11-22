@@ -7,26 +7,42 @@ ControllerSelector::ControllerSelector(std::list<Controller*> controllers)
 {
 	this->controllers = controllers;
 	it = this->controllers.begin();
+	currentIndex = 0;
 }
 
 ControllerSelector::~ControllerSelector()
 {
-
 }
 
 Controller * ControllerSelector::selectNextController()
 {
-	it = std::next(it);
+	currentIndex++;
+	if (currentIndex < (controllers.size() - 1))
+	{
+		it = std::next(it);
+	}
+	else {
+		currentIndex = 0;
+		it = this->controllers.begin();
+	}
 	return getCurrentController();
 }
 
 Controller * ControllerSelector::selectPreviousController()
 {
-	it = std::prev(it);
+	currentIndex--;
+	it = this->controllers.begin();
+
+	if (currentIndex < 0)
+	{
+		currentIndex = (controllers.size() - 1);
+	}
+	it = std::next(it, currentIndex);
+
 	return getCurrentController();
 }
 
 Controller *ControllerSelector::getCurrentController()
 {
-	return (Controller*)&*it;
+	return *it;
 }

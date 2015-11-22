@@ -25,11 +25,12 @@ private:
 
 	ControllerSelector *selector;
 	TTF_Font *font;
+	SDL_Color text_color;
 
 	void initTextures();
 
-	void prepareConsole(int winWidth, int winHeight);
-	void prepareMap(int winWidth, int winHeight);
+	void prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeight);
+	void prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHeight);
 	void preparePathTrace(int winWidth, int winHeight);
 
 public:

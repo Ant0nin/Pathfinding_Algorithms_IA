@@ -16,7 +16,6 @@ Terrain TerrainFactory::createTerrain() {
 	
 	string line;
 	Terrain terrain;
-	SDL_Point startPosition;
 	ifstream file(this->terrainFilename);
 
 	// TODO : vérifier l'existence du fichier

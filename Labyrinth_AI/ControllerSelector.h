@@ -8,6 +8,7 @@ class ControllerSelector
 private:
 	std::list<Controller*> controllers;
 	std::list<Controller*>::iterator it;
+	int currentIndex;
 	
 public:
 	ControllerSelector(std::list<Controller*> controllers);
