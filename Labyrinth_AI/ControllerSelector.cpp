@@ -17,7 +17,7 @@ ControllerSelector::~ControllerSelector()
 Controller * ControllerSelector::selectNextController()
 {
 	currentIndex++;
-	if (currentIndex < (controllers.size() - 1))
+	if (currentIndex < controllers.size())
 	{
 		it = std::next(it);
 	}

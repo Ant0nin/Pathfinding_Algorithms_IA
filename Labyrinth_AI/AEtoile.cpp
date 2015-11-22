@@ -2,7 +2,7 @@
 
 using namespace std;
 
-AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
+/*AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
 
 
 
@@ -41,7 +41,7 @@ AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
 			}
 			//listEnfant.sort();
 			//pile.join(listEnfant);
-		}*/
+		}
 	}
 
 
@@ -49,6 +49,17 @@ AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
 	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->pos.x, curNoeud->pos.y);
 
 
+}*/
+
+AEtoile::AEtoile(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction>* op)
+	: Controller("A Star", characterPosition, terrain, op)
+{
 }
+
+void AEtoile::execute() {
+	// TODO
+}
+
+
 
 

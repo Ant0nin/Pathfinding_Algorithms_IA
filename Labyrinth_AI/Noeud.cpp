@@ -1,41 +1,56 @@
 #include "Noeud.h"
+#include <cmath>
 
-
-Noeud* popa;
-
-Noeud::Noeud(SDL_Point pos,Noeud* pere)
+Noeud::Noeud(SDL_Point pos, Noeud* pere)
 {
 	this->pos = pos;
-	popa = pere;
+	parent = pere;
 	heur = calcHeur();
-
 }
 
-/*Noeud* Noeud::sucesseur(Direction op)
+Noeud* Noeud::successeur(Direction op)
 {
-	int newX = pos.x;
-	int newY = pos.y;
+	SDL_Point newPos = pos;
+
 	switch (op)
 	{
 	case HAUT:
-		newY--;
+		newPos.y--;
 		break;
 	case BAS:
-		newY++;
+		newPos.y++;
 		break;
 	case GAUCHE:
-		newX--;
+		newPos.x--;
 		break;
 	case DROITE:
-		newX++;
+		newPos.x++;
 		break;
 	}
-	return &Noeud(newX,newY,this);
-}*/
 
-Noeud* Noeud::getPopa()
+	return &Noeud(newPos, this);
+}
+
+bool Noeud::isValid(Terrain * terrain)
 {
-	return popa;
+	Tile target = terrain->tiles[pos.x + terrain->width * pos.y];
+	return (target != Tile::WALL);
+}
+
+bool Noeud::isBut(Terrain * terrain)
+{
+	Tile target = terrain->tiles[pos.x + terrain->width * pos.y];
+	return (target == Tile::EXIT);
+}
+
+Noeud* Noeud::getParent()
+{
+	return parent;
+}
+
+SDL_Point Noeud::getPosition()
+{
+	return pos;
 }
 
 int Noeud::calcHeur()

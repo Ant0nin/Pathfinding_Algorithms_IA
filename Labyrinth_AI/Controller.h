@@ -5,6 +5,7 @@
 #include "Terrain.h"
 #include "Noeud.h"
 #include "ControllerInfo.h"
+#include "Direction.h"
 
 // abstract
 class Controller {

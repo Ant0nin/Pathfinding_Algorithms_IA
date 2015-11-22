@@ -1,24 +1,25 @@
 #pragma once
 
-
 #include "Controller.h"
 #include "Direction.h"
-#include <cmath>
 #include <SDL2\SDL.h>
-
 
 class Noeud {
 
-public:
-	Noeud(SDL_Point pos);
-	Noeud(SDL_Point pos,Noeud* pere);
-	Noeud sucesseur(Direction op);
-	bool valid();
-	bool isBut();
-	Noeud* getPopa();
-	int calcHeur();
-
+private:
+	Noeud *parent;
 	int heur;
 	SDL_Point pos;
+
+public:
+	Noeud(SDL_Point pos, Noeud* parent = nullptr);
+	Noeud* successeur(Direction op);
+	int calcHeur();
+
+	bool isValid(Terrain *terrain);
+	bool isBut(Terrain *terrain);
+
+	Noeud* getParent();
+	SDL_Point getPosition();
 	
 };

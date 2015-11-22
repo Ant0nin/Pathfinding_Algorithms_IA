@@ -4,13 +4,17 @@
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_image.h>
 #include <SDL2\SDL_ttf.h>
-#include <string>
 
 #define PRINT_TEXT \
 lineIndex++; \
 consoleZone.y = lineIndex * consoleZone.h; \
 this->texture_console = SDL_CreateTextureFromSurface(this->renderer, textSurface); \
 SDL_RenderCopy(renderer, texture_console, NULL, &consoleZone);
+
+#define FORMAT_TIME \
+_itoa_s(info->duration, str, 10); \
+strcat_s(str, " ms"); \
+textSurface = TTF_RenderText_Solid(font, str, text_color);
 
 Scene::Scene(Terrain *terrain, Character *character, ControllerSelector *selector)
 {
@@ -115,8 +119,9 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 
 	ControllerInfo *info = selector->getCurrentController()->getInfo();
 	consoleZone.h = consoleZone.h / CONSOLE_LINE_QUANTITY;
-	SDL_Surface *textSurface = nullptr;
+	SDL_Surface *textSurface = nullptr; // buffer
 	int lineIndex = 0;
+	char str[20]; // buffer
 
 	textSurface = TTF_RenderText_Solid(font, info->controllerName, text_color);
 	PRINT_TEXT
@@ -131,11 +136,15 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 	case SUCCESS:
 		textSurface = TTF_RenderText_Solid(font, "SUCCESS", text_color);
 		PRINT_TEXT
+		FORMAT_TIME
+		PRINT_TEXT
 		// TODO : Afficher les chemins et temps d'execution
 		break;
 
 	case FAILED:
 		textSurface = TTF_RenderText_Solid(font, "FAILED", text_color);
+		PRINT_TEXT
+		FORMAT_TIME
 		PRINT_TEXT
 		// TODO : Afficher temps d'execution
 		break;
@@ -147,7 +156,32 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 
 void Scene::preparePathTrace(int winWidth, int winHeight)
 {
-	// TODO
+	ControllerInfo *info = selector->getCurrentController()->getInfo();
+	std::list<Noeud*>::iterator it = info->cheminement.begin();
+	int currentIndex = 0;
+
+	Noeud *prevNode;
+	Noeud *nextNode;
+	SDL_Point posPrevNode;
+	SDL_Point posNextNode;
+
+	// TODO : Wrong! Remonter les popas :
+	while (currentIndex < (info->cheminement.size()-1)) {
+
+		prevNode = *it;
+		it = std::next(it);
+		currentIndex++;
+		nextNode = *it;
+		
+		posPrevNode = prevNode->getPosition();
+		posNextNode = prevNode->getPosition();
+
+		SDL_RenderDrawLine(renderer, 
+			posPrevNode.x, 
+			posPrevNode.y, 
+			posNextNode.x, 
+			posNextNode.y);
+	}
 }
 
 void Scene::render()
