@@ -40,11 +40,13 @@ void InputListener::run()
 
 				switch (event.key.keysym.sym) {
 
+				case SDLK_RIGHT: // Flèche droite
 				case SDLK_DOWN: // Flèche bas
 					activeController = selector->selectNextController();
 					scene->render();
 					break;
 
+				case SDLK_LEFT: // Flèche gauche
 				case SDLK_UP: // Flèche haut
 					activeController = selector->selectPreviousController();
 					scene->render();
