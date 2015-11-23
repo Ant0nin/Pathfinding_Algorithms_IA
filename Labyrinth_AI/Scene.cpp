@@ -103,6 +103,17 @@ void Scene::prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeigh
 			}
 		}
 	}
+
+	// Affichage du personnage
+	SDL_Rect decoupage;
+	decoupage.x = 0;
+	decoupage.y = 0;
+	decoupage.w = 128;
+	decoupage.h = 128;
+	drawZone.x = terrain->startPosition.x * drawZone.w;
+	drawZone.y = terrain->startPosition.y * drawZone.h;
+	SDL_RenderCopy(renderer, spritesheet_character, &decoupage, &drawZone);
+
 }
 
 void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHeight)
