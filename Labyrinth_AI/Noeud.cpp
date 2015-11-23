@@ -28,7 +28,7 @@ Noeud* Noeud::successeur(Direction op)
 		break;
 	}
 
-	return &Noeud(newPos, this);
+	return new Noeud(newPos, this);
 }
 
 bool Noeud::isValid(Terrain * terrain)
@@ -41,6 +41,11 @@ bool Noeud::isBut(Terrain * terrain)
 {
 	Tile target = terrain->tiles[pos.x + terrain->width * pos.y];
 	return (target == Tile::EXIT);
+}
+
+bool Noeud::isStart()
+{
+	return (getParent() == nullptr);
 }
 
 Noeud* Noeud::getParent()

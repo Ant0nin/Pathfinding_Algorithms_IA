@@ -156,7 +156,7 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 
 void Scene::preparePathTrace(int winWidth, int winHeight)
 {
-	ControllerInfo *info = selector->getCurrentController()->getInfo();
+	/*ControllerInfo *info = selector->getCurrentController()->getInfo();
 	std::list<Noeud*>::iterator it = info->cheminement.begin();
 	int currentIndex = 0;
 
@@ -181,7 +181,7 @@ void Scene::preparePathTrace(int winWidth, int winHeight)
 			posPrevNode.y, 
 			posNextNode.x, 
 			posNextNode.y);
-	}
+	}*/
 }
 
 void Scene::render()

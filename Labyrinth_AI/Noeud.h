@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Controller.h"
 #include "Direction.h"
+#include "Terrain.h"
 #include <SDL2\SDL.h>
 
 class Noeud {
@@ -18,6 +18,7 @@ public:
 
 	bool isValid(Terrain *terrain);
 	bool isBut(Terrain *terrain);
+	bool isStart();
 
 	Noeud* getParent();
 	SDL_Point getPosition();
