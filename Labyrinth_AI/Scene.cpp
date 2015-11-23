@@ -7,14 +7,21 @@
 
 #define PRINT_TEXT \
 lineIndex++; \
-consoleZone.y = lineIndex * consoleZone.h; \
+textSurface = TTF_RenderText_Blended_Wrapped(font, text, text_color, consoleWidth); \
+TTF_SizeText(font, text, &fontWidth, &fontHeight); \
+lineZone.w = fontWidth; \
+lineZone.y = lineIndex * lineZone.h; \
 this->texture_console = SDL_CreateTextureFromSurface(this->renderer, textSurface); \
-SDL_RenderCopy(renderer, texture_console, NULL, &consoleZone);
+SDL_RenderCopy(renderer, texture_console, NULL, &lineZone);
+
+#define CARRIAGE_RETURN \
+memcpy_s(text, bufferLength, "", bufferLength); \
+PRINT_TEXT
 
 #define FORMAT_TIME \
-_itoa_s(info->duration, str, 10); \
-strcat_s(str, " ms"); \
-textSurface = TTF_RenderText_Solid(font, str, text_color);
+_itoa_s(info->duration, text, 10); \
+strcat_s(text, " ms"); \
+textSurface = TTF_RenderText_Blended_Wrapped(font, text, text_color, consoleWidth);
 
 Scene::Scene(Terrain *terrain, Character *character, ControllerSelector *selector)
 {
@@ -100,41 +107,45 @@ void Scene::prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeigh
 
 void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHeight)
 {
-	SDL_Rect consoleZone;
-	
+	SDL_Rect lineZone;
+	const int bufferLength = 64;
+	char text[bufferLength];
+	int fontWidth, fontHeight;
+	const int consoleWidth = winWidth - (winWidth - mapWidth);
+
+	fontHeight = TTF_FontHeight(font);
+
+	// TODO : Corriger les dimensions de la console
 	if (winWidth <= winHeight) {
-		consoleZone.x = 0;
-		consoleZone.y = winHeight - mapHeight;
-		consoleZone.w = winWidth;
-		consoleZone.h = winHeight - consoleZone.y;
+		lineZone.x = 0;
+		lineZone.y = winHeight - mapHeight;
+		lineZone.w = winWidth;
+		lineZone.h = winHeight - lineZone.y;
 	}
 	else {
-		consoleZone.x = winWidth - mapWidth;
-		consoleZone.y = 0;
-		consoleZone.w = winWidth - consoleZone.x;
-		consoleZone.h = winHeight;
+		lineZone.x = winWidth - mapWidth;
+		lineZone.y = 0;
+		lineZone.w = consoleWidth;
+		lineZone.h = winHeight / fontHeight;
 	}
 
-	//SDL_RenderFillRect(renderer, &consoleZone);
-
 	ControllerInfo *info = selector->getCurrentController()->getInfo();
-	consoleZone.h = consoleZone.h / CONSOLE_LINE_QUANTITY;
 	SDL_Surface *textSurface = nullptr; // buffer
 	int lineIndex = 0;
-	char str[20]; // buffer
 
-	textSurface = TTF_RenderText_Solid(font, info->controllerName, text_color);
+	memcpy_s(text, bufferLength, info->controllerName, bufferLength);
 	PRINT_TEXT
+	CARRIAGE_RETURN
 
 	switch (info->state) {
 
 	case IDLE:
-		textSurface = TTF_RenderText_Solid(font, "IDLE", text_color);
+		memcpy_s(text, bufferLength, "IDLE", bufferLength);
 		PRINT_TEXT
 		break;
 
 	case SUCCESS:
-		textSurface = TTF_RenderText_Solid(font, "SUCCESS", text_color);
+		memcpy_s(text, bufferLength, "SUCCESS", bufferLength);
 		PRINT_TEXT
 		FORMAT_TIME
 		PRINT_TEXT
@@ -142,7 +153,7 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 		break;
 
 	case FAILED:
-		textSurface = TTF_RenderText_Solid(font, "FAILED", text_color);
+		memcpy_s(text, bufferLength, "FAILED", bufferLength);
 		PRINT_TEXT
 		FORMAT_TIME
 		PRINT_TEXT
@@ -151,7 +162,7 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 
 	}
 	this->texture_console = SDL_CreateTextureFromSurface(this->renderer, textSurface);
-	SDL_RenderCopy(renderer, texture_console, NULL, &consoleZone);
+	SDL_RenderCopy(renderer, texture_console, NULL, &lineZone);
 }
 
 void Scene::preparePathTrace(int winWidth, int winHeight)
