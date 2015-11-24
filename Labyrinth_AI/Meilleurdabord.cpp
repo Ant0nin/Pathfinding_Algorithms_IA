@@ -4,11 +4,6 @@
 
 using namespace std;
 
-Meilleurdabord::Meilleurdabord(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction> * op)
-	: Controller("Best first", characterPosition, terrain, op)
-{
-}
-
 bool Meilleurdabord::isValid(SDL_Point* pos)
 {
 	/*bool ret = true;

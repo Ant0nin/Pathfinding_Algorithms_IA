@@ -17,7 +17,7 @@ private:
 	
 protected:
 	ControllerInfo info;
-	Controller(const char name[], SDL_Point *characterPos, Terrain *terrain, std::list<Direction> *op);
+	Controller(const char name[], Noeud *etatInitial, Terrain *terrain, std::list<Direction> *op);
 
 public:
 	ControllerInfo* getInfo();
