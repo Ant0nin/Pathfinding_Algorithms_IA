@@ -23,6 +23,17 @@ _itoa_s(info->duration, text, 10); \
 strcat_s(text, " ms"); \
 textSurface = TTF_RenderText_Blended_Wrapped(font, text, text_color, consoleWidth);
 
+#define TRACE_LINE \
+nodeSuiv = nodePrev->getParent(); \
+nodePrevPos = nodePrev->getPosition(); \
+nodeSuivPos = nodeSuiv->getPosition(); \
+SDL_RenderDrawLine(renderer, \
+	nodePrevPos.x, \
+	nodePrevPos.y, \
+	nodeSuivPos.x, \
+	nodeSuivPos.y \
+);
+
 Scene::Scene(Terrain *terrain, Character *character, ControllerSelector *selector)
 {
 	this->window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
@@ -176,34 +187,44 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 	SDL_RenderCopy(renderer, texture_console, NULL, &lineZone);
 }
 
+// TODO : Faire un code un peu plus élégant pour cette fonction
 void Scene::preparePathTrace(int winWidth, int winHeight)
 {
-	/*ControllerInfo *info = selector->getCurrentController()->getInfo();
-	std::list<Noeud*>::iterator it = info->cheminement.begin();
-	int currentIndex = 0;
+	ControllerInfo *info = selector->getCurrentController()->getInfo();
 
-	Noeud *prevNode;
-	Noeud *nextNode;
-	SDL_Point posPrevNode;
-	SDL_Point posNextNode;
+	// Affichage des chemins de parcours dans l'espace de recherche
+	SDL_SetRenderDrawColor(renderer, COLOR_CHEMINEMENT, 1);
+	if (info->state != ControllerState::IDLE) {
 
-	// TODO : Wrong! Remonter les popas :
-	while (currentIndex < (info->cheminement.size()-1)) {
+		std::list<Noeud*>::iterator it = info->cheminement.begin();
+		int currentIndex = 0;
 
-		prevNode = *it;
-		it = std::next(it);
-		currentIndex++;
-		nextNode = *it;
-		
-		posPrevNode = prevNode->getPosition();
-		posNextNode = prevNode->getPosition();
+		Noeud *nodePrev;
+		Noeud *nodeSuiv;
+		SDL_Point nodePrevPos;
+		SDL_Point nodeSuivPos;
 
-		SDL_RenderDrawLine(renderer, 
-			posPrevNode.x, 
-			posPrevNode.y, 
-			posNextNode.x, 
-			posNextNode.y);
-	}*/
+		while (currentIndex < info->cheminement.size()) {
+
+			nodePrev = *it;
+
+			while (!nodePrev->isStart()) {
+				TRACE_LINE
+			}
+
+			it = std::next(it);
+			currentIndex++;
+		}
+
+		// Affichage du bon chemin
+		SDL_SetRenderDrawColor(renderer, COLOR_ARRIVE, 1);
+		nodePrev = info->arrive;
+
+		while (!nodePrev->isStart()) {
+			TRACE_LINE
+		}
+
+	}
 }
 
 void Scene::render()

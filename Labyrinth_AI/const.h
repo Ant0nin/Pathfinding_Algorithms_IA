@@ -15,4 +15,7 @@
 
 #define LEVEL_NUMBER 001
 
+#define COLOR_CHEMINEMENT	255,0,0
+#define COLOR_ARRIVE		0,255,0
+
 #define TEXT_COLOR_GENERAL { 0,0,0 }
