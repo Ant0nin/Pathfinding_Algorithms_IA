@@ -10,6 +10,5 @@ class AEtoile : public Controller {
 
 public:
 	AEtoile(Noeud * characterPosition, Terrain * ter, std::list<Direction>* op);
-	AEtoile(SDL_Point *characterPosition, Terrain *terrain, std::list<Direction> *op);
 	virtual void execute() override;
 };
