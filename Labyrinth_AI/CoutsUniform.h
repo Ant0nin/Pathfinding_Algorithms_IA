@@ -7,7 +7,7 @@ class CoutsUniform :
 	public Controller
 {
 public:
-	CoutsUniform(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction> * op);
+	CoutsUniform(Noeud * etatInitial, Terrain * terrain, std::list<Direction> * op);
 	virtual void execute() override;
 };
 

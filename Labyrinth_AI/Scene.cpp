@@ -190,7 +190,7 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 // TODO : Faire un code un peu plus élégant pour cette fonction
 void Scene::preparePathTrace(int winWidth, int winHeight)
 {
-	ControllerInfo *info = selector->getCurrentController()->getInfo();
+	/*ControllerInfo *info = selector->getCurrentController()->getInfo();
 
 	// Affichage des chemins de parcours dans l'espace de recherche
 	SDL_SetRenderDrawColor(renderer, COLOR_CHEMINEMENT, 1);
@@ -224,7 +224,7 @@ void Scene::preparePathTrace(int winWidth, int winHeight)
 			TRACE_LINE
 		}
 
-	}
+	}*/
 }
 
 void Scene::render()

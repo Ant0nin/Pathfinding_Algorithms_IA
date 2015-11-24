@@ -11,7 +11,7 @@
 class Controller {
 
 private:
-	SDL_Point *characterPos;
+	Noeud *etatInitial;
 	Terrain *terrain;
 	std::list<Direction> *op;
 	

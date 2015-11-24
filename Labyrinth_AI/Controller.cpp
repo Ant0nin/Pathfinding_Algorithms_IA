@@ -4,7 +4,7 @@
 Controller::Controller(const char name[], Noeud *etatInitial, Terrain * terrain, std::list<Direction>* op)
 {
 	info.controllerName = name;
-	this->characterPos = characterPos;
+	this->etatInitial = etatInitial;
 	this->terrain = terrain;
 	this->op = op;
 }

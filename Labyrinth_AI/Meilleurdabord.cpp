@@ -4,9 +4,15 @@
 
 using namespace std;
 
-Meilleurdabord::Meilleurdabord(Noeud* characterPosition, Terrain *ter, std::list<Direction> *op){
+Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direction> *op)
+	: Controller("Best First", etatInitial, ter, op)
+{
+}
+
+void Meilleurdabord::execute()
+{
 	//terrain = ter;
-	Pile pile = Pile();
+	/*Pile pile = Pile();
 	Noeud* curNoeud;
 	pile.empil(characterPosition);
 	Pile solution = Pile();
@@ -33,37 +39,7 @@ Meilleurdabord::Meilleurdabord(Noeud* characterPosition, Terrain *ter, std::list
 			pile.join(listEnfant);
 		}
 	}
-//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);
-}
-
-/*
-Meilleurdabord::Meilleurdabord(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction> * op)
-	: Controller("Best first", characterPosition, terrain, op)
-{
-}*/
-
-bool Meilleurdabord::isValid(SDL_Point* pos)
-{
-	/*bool ret = true;
-	//TODO : Antonin verifie si la condition est bonne
-	if (*terrain->tiles+ (sizeof(Tile)*pos->x) + (terrain->width*pos->y) == WALL) ret = false;
-	return ret;*/
-	return true;
-}
-
-bool Meilleurdabord::isBut(SDL_Point* pos)
-{
-	/*bool ret = false;
-	//TODO : Antonin verifie si la condition est bonne
-	if (*terrain->tiles + (sizeof(Tile)*pos->x) + (terrain->width*pos->y) == EXIT) ret = false;
-	return ret;*/
-
-	return true;
-}
-
-void Meilleurdabord::execute()
-{
-	// TODO
+	//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);*/
 }
 
 

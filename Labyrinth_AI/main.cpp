@@ -39,11 +39,10 @@ int main(int argc, int *argv) {
 
 	// Liste des controllers (algorithmes IA)
 	std::list<Controller*> controllers;
-	Noeud* noeudInit = new Noeud(character.position, nullptr);
-
+	Noeud* noeudInit = new Noeud(*character.position);
 	controllers.push_back(new Meilleurdabord(noeudInit, terrain, &op));
-	controllers.push_back(new AEtoile(character.position, terrain, &op));
-	controllers.push_back(new CoutsUniform(character.position, terrain, &op));
+	controllers.push_back(new AEtoile(noeudInit, terrain, &op));
+	controllers.push_back(new CoutsUniform(noeudInit, terrain, &op));
 	ControllerSelector *selector = new ControllerSelector(controllers);
 
 	Scene *scene = new Scene(terrain, &character, selector);
