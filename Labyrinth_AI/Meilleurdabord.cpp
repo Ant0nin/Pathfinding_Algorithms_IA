@@ -4,47 +4,34 @@
 
 using namespace std;
 
-bool Meilleurdabord::isValid(SDL_Point* pos)
+Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direction> *op)
+	: Controller("Best First", etatInitial, ter, op)
 {
-	/*bool ret = true;
-	//TODO : Antonin verifie si la condition est bonne
-	if (*terrain->tiles+ (sizeof(Tile)*pos->x) + (terrain->width*pos->y) == WALL) ret = false;
-	return ret;*/
-	return true;
-}
-
-bool Meilleurdabord::isBut(SDL_Point* pos)
-{
-	/*bool ret = false;
-	//TODO : Antonin verifie si la condition est bonne
-	if (*terrain->tiles + (sizeof(Tile)*pos->x) + (terrain->width*pos->y) == EXIT) ret = false;
-	return ret;*/
-
-	return true;
 }
 
 void Meilleurdabord::execute()
 {
-	/*terrain = ter;
-	Pile pile = Pile();
+	//terrain = ter;
+	/*Pile pile = Pile();
 	Noeud* curNoeud;
-	pile.empil(etatinitial);
+	pile.empil(characterPosition);
 	Pile solution = Pile();
 
-	while (pile.pileNoeud.size != 0) {
+	while (pile.pileNoeud.size() != 0) {
 		curNoeud = pile.depil();
 		solution.empil(curNoeud);
 
-		if (isBut(&curNoeud->pos)) {
+		if (curNoeud->isBut(ter)) {
 			//return curNoeud;
 			break;
 		}
 		else {
 			Pile listEnfant = Pile();
 			//4 le nombre d'operateur
-			for (int i = 0; i<4; i++) {
-				Noeud* curNoeudEnfant = curNoeud->sucesseur(*op);
-				if (isValid(&curNoeud->pos)) {
+			std::list<Direction>::iterator it = op->begin();
+			for (int i = 0; i<op->size(); i++) {
+				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
+				if (curNoeudEnfant->isValid(ter)) {
 					listEnfant.empil(curNoeudEnfant);
 				}
 			}
@@ -52,7 +39,7 @@ void Meilleurdabord::execute()
 			pile.join(listEnfant);
 		}
 	}
-	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->pos.x, curNoeud->pos.y);*/
+	//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);*/
 }
 
 
