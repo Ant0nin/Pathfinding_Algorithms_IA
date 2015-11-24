@@ -4,27 +4,28 @@
 
 using namespace std;
 
-/*Meilleurdabord::Meilleurdabord(Noeud* etatinitial, Direction *op, Terrain * ter) {
-	terrain = ter;
+Meilleurdabord::Meilleurdabord(Noeud* characterPosition, Terrain *ter, std::list<Direction> *op){
+	//terrain = ter;
 	Pile pile = Pile();
 	Noeud* curNoeud;
-	pile.empil(etatinitial);
+	pile.empil(characterPosition);
 	Pile solution = Pile();
 
-	while (pile.pileNoeud.size != 0) {
+	while (pile.pileNoeud.size() != 0) {
 		curNoeud = pile.depil();
 		solution.empil(curNoeud);
 
-		if (isBut(&curNoeud->pos)) {
+		if (curNoeud->isBut(ter)) {
 			//return curNoeud;
 			break;
 		}
 		else {
 			Pile listEnfant = Pile();
 			//4 le nombre d'operateur
-			for (int i = 0; i<4; i++) {
-				Noeud* curNoeudEnfant = curNoeud->sucesseur(*op);
-				if (isValid(&curNoeud->pos)) {
+			std::list<Direction>::iterator it = op->begin();
+			for (int i = 0; i<op->size(); i++) {
+				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
+				if (curNoeudEnfant->isValid(ter)) {
 					listEnfant.empil(curNoeudEnfant);
 				}
 			}
@@ -32,13 +33,14 @@ using namespace std;
 			pile.join(listEnfant);
 		}
 	}
-	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->pos.x, curNoeud->pos.y);
-}*/
+//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);
+}
 
+/*
 Meilleurdabord::Meilleurdabord(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction> * op)
 	: Controller("Best first", characterPosition, terrain, op)
 {
-}
+}*/
 
 bool Meilleurdabord::isValid(SDL_Point* pos)
 {

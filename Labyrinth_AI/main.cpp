@@ -8,6 +8,7 @@
 #include "InputListener.h"
 #include "Controller.h"
 #include "ControllerSelector.h"
+#include "Noeud.h"
 
 #include "const.h"
 #include <list>
@@ -38,7 +39,9 @@ int main(int argc, int *argv) {
 
 	// Liste des controllers (algorithmes IA)
 	std::list<Controller*> controllers;
-	controllers.push_back(new Meilleurdabord(character.position, terrain, &op));
+	Noeud* noeudInit = new Noeud(character.position, nullptr);
+
+	controllers.push_back(new Meilleurdabord(noeudInit, terrain, &op));
 	controllers.push_back(new AEtoile(character.position, terrain, &op));
 	controllers.push_back(new CoutsUniform(character.position, terrain, &op));
 	ControllerSelector *selector = new ControllerSelector(controllers);

@@ -22,5 +22,7 @@ public:
 
 	Noeud* getParent();
 	SDL_Point getPosition();
+
+	int h, g, f;
 	
 };

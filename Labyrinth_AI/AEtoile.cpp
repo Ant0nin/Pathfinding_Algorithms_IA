@@ -2,7 +2,7 @@
 
 using namespace std;
 
-/*AEtoile::AEtoile(Noeud* etatinitial, Direction op) {
+AEtoile::AEtoile(Noeud* etatinitial, Terrain *ter, std::list<Direction> *op) {
 
 
 
@@ -18,21 +18,24 @@ using namespace std;
 		noeudInexplo.empil(curNoeud);
 
 
-		/*if (curNoeud->isBut()) {
+		if (curNoeud->isValid(ter)) {
 			//return curNoeud;
 			break;
 		}
 		else {
 			Pile listEnfant = Pile();
 			//4 le nombre d'operateur
-			for (int i = 0; i<4; i++) {
-				Noeud* curNoeudEnfant = curNoeud->sucesseur(op);
+			std::list<Direction>::iterator it = op->begin();
+			for (int i = 0; i<op->size(); i++) {
+				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
+				
 				//TODO : Son test chelou AEtoile par rapport au cout et il ne teste jamais si c'est un mur
 				if ((noeudInexplo.isIn(curNoeudEnfant) && noeudExplo.isIn(curNoeud))) {
-					curNoeudEnfant.g = curNoeud.g + cout(curNoeud, curNoeudEnfant);
+					//Remplacer cout(curNoeud, curNoeudEnfant) par 1
+					curNoeudEnfant->g = curNoeud->g +1;
 					//TODO : On peut calculer ca dans le noeud directement
-					curNoeudEnfant.f = curNoeudEnfant.g + curNoeudEnfant.h;
-					//Deja fait curNoeudEnfant.popa(curNoeud);
+					curNoeudEnfant->f = curNoeudEnfant->g + curNoeudEnfant->h;
+					//Deja fait a la creation du noeud enfant curNoeudEnfant.popa(curNoeud);
 					listEnfant.empil(curNoeudEnfant);
 				}
 				noeudInexplo.empil(curNoeudEnfant);
@@ -45,11 +48,7 @@ using namespace std;
 	}
 
 
-
-	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->pos.x, curNoeud->pos.y);
-
-
-}*/
+}
 
 AEtoile::AEtoile(SDL_Point * characterPosition, Terrain * terrain, std::list<Direction>* op)
 	: Controller("A Star", characterPosition, terrain, op)
