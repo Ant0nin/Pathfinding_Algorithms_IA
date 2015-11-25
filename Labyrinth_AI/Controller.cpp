@@ -18,3 +18,8 @@ void Controller::reset()
 {
 	// TODO
 }
+
+
+bool Controller::isBut(Noeud* n) {
+	return this->terrain->tiles[n->getPosition().x + terrain->width * n->getPosition().y] == Tile::EXIT;
+}

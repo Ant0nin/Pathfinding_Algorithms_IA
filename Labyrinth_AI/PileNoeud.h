@@ -8,7 +8,15 @@
 
 using namespace std;
 
-class PileNoeud : public priority_queue<Noeud*, vector<Noeud*>,Compar> {
+
+struct ptr_less {
+	template<class PileNoeud>
+	bool operator()(const Noeud& left, const Noeud& right) const {
+		return ((*left) <(*right));
+	}
+};
+
+class PileNoeud : public priority_queue<Noeud*> {
 
 public:
 	
@@ -18,17 +26,11 @@ public:
 	Noeud* depil();
 	void sort();
 	void join(PileNoeud enf);
-	std::priority_queue<Noeud*> pileNoeud;
+	std::priority_queue<Noeud*, vector<Noeud*>, ptr_less> pileNoeud;
 	bool comparHeur(const Noeud& first, const Noeud& second);
 	bool isIn(Noeud* noeud);
+
+
 };
 
 
-class Compar
-{
-public:
-	bool operator()(const Noeud* &a1, const Noeud* &a2)
-	{
-		return a1->heur < a2->heur;
-	}
-};

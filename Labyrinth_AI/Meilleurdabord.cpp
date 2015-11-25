@@ -12,21 +12,18 @@ Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direc
 }
 
 void Meilleurdabord::execute()
-{
-	//terrain = ter;
-
-
-	
+{	
 	PileNoeud pile = PileNoeud();
 	Noeud* curNoeud;
 	pile.empil(etatInitial);
 	PileNoeud solution = PileNoeud();
 
-	while (pile.pileNoeud.size() != 0) {
+	while (pile.size() != 0) {
 		curNoeud = pile.depil();
+		printf("Le noeud est : %i / %i \n",curNoeud->getPosition());
 		solution.empil(curNoeud);
 
-		if (curNoeud->isBut(this->terrain)) {
+		if (isBut(curNoeud)) {
 			//return curNoeud;
 			break;
 		}
@@ -34,17 +31,25 @@ void Meilleurdabord::execute()
 			PileNoeud listEnfant = PileNoeud();
 			//4 le nombre d'operateur
 			std::list<Direction>::iterator it = op->begin();
-			for (int i = 0; i<op->size(); i++) {
+			for (;it!=op->end(); it++) {
 				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
-				if (curNoeudEnfant->isValid(this->terrain)) {
-					listEnfant.empil(curNoeudEnfant);
+				printf("		Enfant : %i / %i", curNoeudEnfant->getPosition(),it);
+				printf("	Prejent : %d \n", pile.isIn(curNoeudEnfant));
+				if (curNoeudEnfant->isValid(this->terrain) && !pile.isIn(curNoeudEnfant)) {
+					//listEnfant.empil(curNoeudEnfant);
+					pile.empil(curNoeudEnfant);
 				}
 			}
-			listEnfant.sort();
-			pile.join(listEnfant);
+			//listEnfant.sort();
+			//pile.join(listEnfant);
 		}
+
+
 	}
-	//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);
+
+
+	
+		
 }
 
 

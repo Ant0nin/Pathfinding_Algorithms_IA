@@ -18,5 +18,5 @@ public :
 
 private :
 	bool isValid(SDL_Point *pos);
-	bool isBut(SDL_Point *pos);
+	
 };

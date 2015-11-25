@@ -3,12 +3,12 @@
 
 
 
-/*PileNoeud::PileNoeud() : std::priority_queue<Noeud*,std::vector<Noeud*>, Compar>()
+PileNoeud::PileNoeud()
 {
-}*/
+}
 
 void PileNoeud::empil(Noeud* n) {	
-	push(n);
+	this->push(n);
 }
 
 Noeud* PileNoeud::depil()
@@ -40,6 +40,8 @@ bool PileNoeud::comparHeur(const Noeud & first, const Noeud & second)
 }
 
 bool PileNoeud::isIn(Noeud* noeud) {
-	return std::find(c.begin, c.end, &noeud) != c.end();
+	bool ret = find(c.cbegin(), c.cend(), noeud) != c.end();
+	return ret;
+
 }
 
