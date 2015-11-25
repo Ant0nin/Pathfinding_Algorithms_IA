@@ -1,4 +1,5 @@
 #include "PileNoeud.h"
+#include <stdlib.h>
 
 
 
@@ -40,7 +41,16 @@ bool PileNoeud::comparHeur(const Noeud & first, const Noeud & second)
 }
 
 bool PileNoeud::isIn(Noeud* noeud) {
-	bool ret = find(c.cbegin(), c.cend(), noeud) != c.end();
+	/*bool ret = find(c.cbegin(), c.cend(), &noeud) != c.cend();
+	return ret;*/
+	bool ret = false;
+	int i=0,nX= noeud->getPosition().x,nY=noeud->getPosition().y;
+	while (i<c.size()) {
+		i++;
+		printf("\n%i / %i ", i, c.size());
+		c.at(i);
+		//if (c.at(i)->getPosition().x == nX && c.at(i)->getPosition().y == nY) ret = true;
+	}
 	return ret;
 
 }
