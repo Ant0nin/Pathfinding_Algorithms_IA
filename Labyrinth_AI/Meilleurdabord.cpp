@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//TODO : finir l'algo et afficher le chemin
+
 Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direction> *op)
 	: Controller("Best First", etatInitial, ter, op)
 {
@@ -12,26 +14,29 @@ Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direc
 void Meilleurdabord::execute()
 {
 	//terrain = ter;
-	/*Pile pile = Pile();
+
+
+	
+	PileNoeud pile = PileNoeud();
 	Noeud* curNoeud;
-	pile.empil(characterPosition);
-	Pile solution = Pile();
+	pile.empil(etatInitial);
+	PileNoeud solution = PileNoeud();
 
 	while (pile.pileNoeud.size() != 0) {
 		curNoeud = pile.depil();
 		solution.empil(curNoeud);
 
-		if (curNoeud->isBut(ter)) {
+		if (curNoeud->isBut(this->terrain)) {
 			//return curNoeud;
 			break;
 		}
 		else {
-			Pile listEnfant = Pile();
+			PileNoeud listEnfant = PileNoeud();
 			//4 le nombre d'operateur
 			std::list<Direction>::iterator it = op->begin();
 			for (int i = 0; i<op->size(); i++) {
 				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
-				if (curNoeudEnfant->isValid(ter)) {
+				if (curNoeudEnfant->isValid(this->terrain)) {
 					listEnfant.empil(curNoeudEnfant);
 				}
 			}
@@ -39,7 +44,7 @@ void Meilleurdabord::execute()
 			pile.join(listEnfant);
 		}
 	}
-	//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);*/
+	//	printf(" Le noeud arrivé au but est : %i / %i", curNoeud->getPosition.x, curNoeud->getPosition.y);
 }
 
 

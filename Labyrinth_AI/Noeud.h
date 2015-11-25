@@ -8,8 +8,8 @@ class Noeud {
 
 private:
 	Noeud *parent;
-	int heur;
 	SDL_Point pos;
+
 
 public:
 	Noeud(SDL_Point pos, Noeud* parent = nullptr);
@@ -23,6 +23,6 @@ public:
 	Noeud* getParent();
 	SDL_Point getPosition();
 
-	int h, g, f;
+	int h, g, f,heur;
 	
 };

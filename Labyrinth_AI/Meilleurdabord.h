@@ -4,7 +4,7 @@
 #include "Direction.h"
 #include "Terrain.h"
 #include "Noeud.h"
-#include "Pile.h"
+#include "PileNoeud.h"
 
 #include <SDL2\SDL.h>
 #include <string>

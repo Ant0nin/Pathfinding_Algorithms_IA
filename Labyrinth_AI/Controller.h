@@ -10,12 +10,11 @@
 // abstract
 class Controller {
 
-private:
+protected:
 	Noeud *etatInitial;
 	Terrain *terrain;
 	std::list<Direction> *op;
 	
-protected:
 	ControllerInfo info;
 	Controller(const char name[], Noeud *etatInitial, Terrain *terrain, std::list<Direction> *op);
 

@@ -2,7 +2,7 @@
 
 #include "Controller.h"
 #include "Noeud.h"
-#include "Pile.h"
+#include "PileNoeud.h"
 #include "Direction.h"
 #include <SDL2\SDL.h>
 
