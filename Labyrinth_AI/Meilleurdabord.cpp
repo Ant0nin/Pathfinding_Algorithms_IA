@@ -44,6 +44,7 @@ void Meilleurdabord::execute()
 		}
 	}
 
+	info.state = ControllerState::SUCCESS;
 	info.arrive = curNoeud;
 
 	while (!isStart(curNoeud)) {

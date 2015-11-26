@@ -23,6 +23,7 @@ protected:
 	virtual bool isStart(Noeud *n);
 
 public:
+
 	ControllerInfo* getInfo();
 	void reset();
 

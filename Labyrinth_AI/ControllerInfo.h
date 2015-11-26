@@ -9,7 +9,7 @@ using namespace std;
 struct ControllerInfo {
 	const char *controllerName;
 	ControllerState state;
-	Noeud* arrive;
+	list<Noeud*> arrive;
 	list<Noeud*> cheminement;
 	Uint32 duration = 0;
 	int cout = 0;
