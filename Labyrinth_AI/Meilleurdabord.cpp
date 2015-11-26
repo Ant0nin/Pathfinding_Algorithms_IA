@@ -45,7 +45,7 @@ void Meilleurdabord::execute()
 	}
 
 	info.arrive = curNoeud;
-
+	info.cheminement = &dejaExplo;
 	while (!isStart(curNoeud)) {
 		info.cout++;
 		curNoeud = curNoeud->getParent();
