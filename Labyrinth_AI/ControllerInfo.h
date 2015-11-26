@@ -12,4 +12,5 @@ struct ControllerInfo {
 	Noeud* arrive;
 	list<Noeud*> cheminement;
 	Uint32 duration = 0;
+	int cout = 0;
 };

@@ -46,10 +46,8 @@ bool PileNoeud::isIn(Noeud* noeud) {
 	bool ret = false;
 	int i=0,nX= noeud->getPosition().x,nY=noeud->getPosition().y;
 	while (i<c.size()) {
+		if (c.at(i)->getPosition().x == nX && c.at(i)->getPosition().y == nY) ret = true;
 		i++;
-		printf("\n%i / %i ", i, c.size());
-		c.at(i);
-		//if (c.at(i)->getPosition().x == nX && c.at(i)->getPosition().y == nY) ret = true;
 	}
 	return ret;
 
