@@ -31,3 +31,36 @@ bool Controller::isStart(Noeud *n) {
 bool Controller::isValid(Noeud *n) {
 	return (terrain->tiles[n->getPosition().x + terrain->width * n->getPosition().y] != Tile::WALL);
 }
+
+void Controller::execute()
+{
+	PileNoeud aExplo = PileNoeud(), dejaExplo = PileNoeud();
+	Noeud* curNoeud = NULL;
+	aExplo.empil(etatInitial);
+
+	while (aExplo.size() != 0) {
+		curNoeud = aExplo.depil();
+		dejaExplo.empil(curNoeud);
+		if (isBut(curNoeud)) break;
+		else {
+			std::list<Direction>::iterator it = op->begin();
+			for (; it != op->end(); it++) {
+				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
+				if (isValid(curNoeudEnfant) && (!dejaExplo.isIn(curNoeudEnfant) && !aExplo.isIn(curNoeudEnfant))) {
+					heuristique(curNoeudEnfant);
+					aExplo.empil(curNoeudEnfant);
+				}
+			}
+		}
+	}
+
+	info.bestWay = new PileNoeud();
+	info.charted = &dejaExplo;
+	while (!isStart(curNoeud)) {
+		info.cout++;
+		info.bestWay->empil(curNoeud);
+		curNoeud = curNoeud->getParent();
+	}
+
+	printf("Depart : %i / %i : %i/%i parcouru\n", curNoeud->getPosition(), info.cout, dejaExplo.size());
+}

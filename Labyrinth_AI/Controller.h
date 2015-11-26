@@ -26,5 +26,7 @@ public:
 	bool isValid(Noeud *n);
 	bool isStart(Noeud *n);
 
-	virtual void execute() = 0; // à définir obligatoirement dans chaque classe fille
+	virtual void execute();
+	virtual void heuristique(Noeud *)=0;
+		
 };
