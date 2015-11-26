@@ -18,10 +18,13 @@ protected:
 	ControllerInfo info;
 	Controller(const char name[], Noeud *etatInitial, Terrain *terrain, std::list<Direction> *op);
 
-
 public:
 	ControllerInfo* getInfo();
 	void reset();
-	bool isBut(Noeud * n);
+
+	bool isBut(Noeud *n);
+	bool isValid(Noeud *n);
+	bool isStart(Noeud *n);
+
 	virtual void execute() = 0; // à définir obligatoirement dans chaque classe fille
 };

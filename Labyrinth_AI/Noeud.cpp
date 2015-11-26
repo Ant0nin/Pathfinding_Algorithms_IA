@@ -31,23 +31,6 @@ Noeud* Noeud::successeur(Direction op)
 	return new Noeud(newPos, this);
 }
 
-bool Noeud::isValid(Terrain * terrain)
-{
-	Tile target = terrain->tiles[pos.x + terrain->width * pos.y];
-	return (target != Tile::WALL);
-}
-
-bool Noeud::isBut(Terrain * terrain)
-{
-	Tile target = terrain->tiles[pos.x + terrain->width * pos.y];
-	return (target == Tile::EXIT);
-}
-
-bool Noeud::isStart()
-{
-	return (getParent() == nullptr);
-}
-
 Noeud* Noeud::getParent()
 {
 	return parent;

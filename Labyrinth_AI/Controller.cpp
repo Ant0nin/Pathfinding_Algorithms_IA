@@ -21,5 +21,13 @@ void Controller::reset()
 
 
 bool Controller::isBut(Noeud* n) {
-	return this->terrain->tiles[n->getPosition().x + terrain->width * n->getPosition().y] == Tile::EXIT;
+	return (terrain->tiles[n->getPosition().x + terrain->width * n->getPosition().y] == Tile::EXIT);
+}
+
+bool Controller::isStart(Noeud *n) {
+	return (!n->getParent());
+}
+
+bool Controller::isValid(Noeud *n) {
+	return (terrain->tiles[n->getPosition().x + terrain->width * n->getPosition().y] != Tile::WALL);
 }

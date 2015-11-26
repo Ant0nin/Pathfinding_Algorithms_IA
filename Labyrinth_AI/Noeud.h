@@ -10,15 +10,10 @@ private:
 	Noeud *parent;
 	SDL_Point pos;
 
-
 public:
 	Noeud(SDL_Point pos, Noeud* parent = nullptr);
 	Noeud* successeur(Direction op);
 	int calcHeur();
-
-	bool isValid(Terrain *terrain);
-	bool isBut(Terrain *terrain);
-	bool isStart();
 
 	Noeud* getParent();
 	SDL_Point getPosition();
