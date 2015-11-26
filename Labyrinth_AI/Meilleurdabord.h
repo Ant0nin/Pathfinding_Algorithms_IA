@@ -5,6 +5,7 @@
 #include "Terrain.h"
 #include "Noeud.h"
 #include "PileNoeud.h"
+#include <math.h>
 
 #include <SDL2\SDL.h>
 #include <string>
@@ -14,5 +15,5 @@ class Meilleurdabord : public Controller {
 
 public :
 	Meilleurdabord(Noeud *etatInitial, Terrain *terrain, std::list<Direction> *op);
-	virtual void execute() override;
+	virtual void heuristique(Noeud *) override;
 };
