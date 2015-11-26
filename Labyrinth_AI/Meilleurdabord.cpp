@@ -35,7 +35,7 @@ void Meilleurdabord::execute()
 				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
 				printf("		Enfant : %i / %i", curNoeudEnfant->getPosition(),it);
 				printf("	Prejent : %d \n", pile.isIn(curNoeudEnfant));
-				if (curNoeudEnfant->isValid(this->terrain) && !pile.isIn(curNoeudEnfant)) {
+				if (this->isValid(curNoeudEnfant) && !pile.isIn(curNoeudEnfant)) {
 					//listEnfant.empil(curNoeudEnfant);
 					pile.empil(curNoeudEnfant);
 				}
