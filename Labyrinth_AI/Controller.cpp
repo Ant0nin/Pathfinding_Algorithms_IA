@@ -19,7 +19,6 @@ void Controller::reset()
 	// TODO
 }
 
-
 bool Controller::isBut(Noeud* n) {
 	return (terrain->tiles[n->getPosition().x + terrain->width * n->getPosition().y] == Tile::EXIT);
 }
@@ -53,6 +52,8 @@ void Controller::execute()
 			}
 		}
 	}
+
+	info.state = ControllerState::SUCCESS;
 
 	info.bestWay = new PileNoeud();
 	info.charted = &dejaExplo;

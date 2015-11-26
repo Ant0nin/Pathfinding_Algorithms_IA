@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Controller.h"
 #include "const.h"
+#include "PileNoeud.h"
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_image.h>
 #include <SDL2\SDL_ttf.h>
@@ -24,14 +25,14 @@ strcat_s(text, " ms"); \
 textSurface = TTF_RenderText_Blended_Wrapped(font, text, text_color, consoleWidth);
 
 #define TRACE_LINE \
-nodeSuiv = nodePrev->getParent(); \
 nodePrevPos = nodePrev->getPosition(); \
 nodeSuivPos = nodeSuiv->getPosition(); \
+printf("%i %i --- %i %i\n", nodePrevPos.x, nodePrevPos.y, nodeSuivPos.x, nodeSuivPos.y); \
 SDL_RenderDrawLine(renderer, \
-	nodePrevPos.x, \
-	nodePrevPos.y, \
-	nodeSuivPos.x, \
-	nodeSuivPos.y \
+	nodePrevPos.x * tileWidth + tileWidth / 2, \
+	nodePrevPos.y * tileHeight + tileHeight / 2, \
+	nodeSuivPos.x * tileWidth + tileWidth / 2, \
+	nodeSuivPos.y * tileHeight + + tileHeight / 2 \
 );
 
 Scene::Scene(Terrain *terrain, Character *character, ControllerSelector *selector)
@@ -73,7 +74,7 @@ void Scene::initTextures()
 	SDL_free(buffer);
 }
 
-void Scene::prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeight)
+void Scene::prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeight, int *tileWidth, int *tileHeight)
 {
 	SDL_Rect drawZone;
 
@@ -88,6 +89,8 @@ void Scene::prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeigh
 	else
 		drawZone.w = (winHeight - winHeight % terrain->height) / terrain->height;
 	drawZone.h = drawZone.w;
+	*tileWidth = drawZone.w;
+	*tileHeight = drawZone.h;
 
 	*mapWidth = drawZone.w * terrain->width;
 	*mapHeight = drawZone.h * terrain->height;
@@ -188,15 +191,16 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 }
 
 // TODO : Faire un code un peu plus élégant pour cette fonction
-void Scene::preparePathTrace(int winWidth, int winHeight)
+void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int tileHeight)
 {
-	/*ControllerInfo *info = selector->getCurrentController()->getInfo();
+	Controller *controller = selector->getCurrentController();
+	ControllerInfo *info = controller->getInfo();
 
 	// Affichage des chemins de parcours dans l'espace de recherche
 	SDL_SetRenderDrawColor(renderer, COLOR_CHEMINEMENT, 1);
 	if (info->state != ControllerState::IDLE) {
 
-		std::list<Noeud*>::iterator it = info->cheminement.begin();
+		PileNoeud *bestWay = info->bestWay;
 		int currentIndex = 0;
 
 		Noeud *nodePrev;
@@ -204,37 +208,42 @@ void Scene::preparePathTrace(int winWidth, int winHeight)
 		SDL_Point nodePrevPos;
 		SDL_Point nodeSuivPos;
 
-		while (currentIndex < info->cheminement.size()) {
+		/*while (currentIndex < info->cheminement.size()) {
 
 			nodePrev = *it;
 
-			while (!nodePrev->isStart()) {
+			while (!controller->isStart(nodePrev)) {
 				TRACE_LINE
 			}
 
 			it = std::next(it);
 			currentIndex++;
-		}
+		}*/
 
 		// Affichage du bon chemin
 		SDL_SetRenderDrawColor(renderer, COLOR_ARRIVE, 1);
-		nodePrev = info->arrive;
 
-		while (!nodePrev->isStart()) {
+		int i = 1;
+		vector<Noeud*> c = bestWay->getC();
+		while (i <c.size()) {
+			nodePrev = c.at(i - 1);
+			nodeSuiv = c.at(i);
 			TRACE_LINE
+			SDL_RenderPresent(renderer); // TODO
+			i++;
 		}
 
-	}*/
+	}
 }
 
 void Scene::render()
 {
-	int winWidth, winHeight, mapWidth, mapHeight;
+	int winWidth, winHeight, mapWidth, mapHeight, tileWidth, tileHeight;
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
 
-	prepareMap(winWidth, winHeight, &mapWidth, &mapHeight);
+	prepareMap(winWidth, winHeight, &mapWidth, &mapHeight, &tileWidth, &tileHeight);
 	prepareConsole(winWidth, winHeight, mapWidth, mapHeight);
-	preparePathTrace(winWidth, winHeight);
+	preparePathTrace(winWidth, winHeight, tileWidth, tileHeight);
 
 	SDL_RenderPresent(renderer);
 }

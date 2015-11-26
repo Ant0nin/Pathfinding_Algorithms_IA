@@ -53,3 +53,8 @@ bool PileNoeud::isIn(Noeud* noeud) {
 
 }
 
+vector<Noeud*> PileNoeud::getC()
+{
+	return c;
+}
+

@@ -29,9 +29,9 @@ private:
 
 	void initTextures();
 
-	void prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeight);
+	void prepareMap(int winWidth, int winHeight, int *mapWidth, int *mapHeight, int *tileWidth, int *tileHeight);
 	void prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHeight);
-	void preparePathTrace(int winWidth, int winHeight);
+	void preparePathTrace(int winWidth, int winHeight, int tileWidth, int tileHeight);
 
 public:
 	Scene(Terrain *terrain, Character *character, ControllerSelector *selector);

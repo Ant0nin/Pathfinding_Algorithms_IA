@@ -20,7 +20,6 @@ class PileNoeud : public priority_queue<Noeud*> {
 
 public:
 	
-
 	PileNoeud();
 	void empil(Noeud* n);
 	Noeud* depil();
@@ -29,7 +28,7 @@ public:
 	//std::priority_queue<Noeud*, vector<Noeud*>, ptr_less> pileNoeud;
 	bool comparHeur(const Noeud& first, const Noeud& second);
 	bool isIn(Noeud* noeud);
-
+	vector<Noeud*> getC();
 
 };
 
