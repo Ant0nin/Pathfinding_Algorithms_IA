@@ -33,13 +33,15 @@ bool Controller::isValid(Noeud *n) {
 
 void Controller::execute()
 {
-	PileNoeud aExplo = PileNoeud(), dejaExplo = PileNoeud();
+	PileNoeud aExplo = PileNoeud();
+	PileNoeud dejaExplo = PileNoeud();
 	Noeud* curNoeud = NULL;
 	aExplo.empil(etatInitial);
 
 	while (aExplo.size() != 0) {
 		curNoeud = aExplo.depil();
 		dejaExplo.empil(curNoeud);
+		info.charted.push_front(curNoeud);
 		if (isBut(curNoeud)) break;
 		else {
 			std::list<Direction>::iterator it = op->begin();
@@ -55,11 +57,10 @@ void Controller::execute()
 
 	info.state = ControllerState::SUCCESS;
 
-	info.bestWay = new PileNoeud();
-	info.charted = &dejaExplo;
+	info.bestWay = list<Noeud*>();
 	while (!isStart(curNoeud)) {
 		info.cout++;
-		info.bestWay->empil(curNoeud);
+		info.bestWay.push_front(curNoeud);
 		curNoeud = curNoeud->getParent();
 	}
 

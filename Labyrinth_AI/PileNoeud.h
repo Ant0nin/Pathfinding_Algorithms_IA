@@ -7,16 +7,15 @@
 #include "Noeud.h"
 
 using namespace std;
-/*
 
 struct ptr_less {
-	template<class PileNoeud>
+	template<typename Noeud>
 	bool operator()(const Noeud& left, const Noeud& right) const {
-		return ((*left) <(*right));
+		return ((left->heur) < (right->heur));
 	}
-};*/
+};
 
-class PileNoeud : public priority_queue<Noeud*> {
+class PileNoeud : public priority_queue<Noeud*, vector<Noeud*>, ptr_less> {
 
 public:
 	
@@ -25,7 +24,6 @@ public:
 	Noeud* depil();
 	void sort();
 	void join(PileNoeud enf);
-	//std::priority_queue<Noeud*, vector<Noeud*>, ptr_less> pileNoeud;
 	bool comparHeur(const Noeud& first, const Noeud& second);
 	bool isIn(Noeud* noeud);
 	vector<Noeud*> getC();

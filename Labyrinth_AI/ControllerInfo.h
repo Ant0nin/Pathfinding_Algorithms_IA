@@ -10,8 +10,10 @@ using namespace std;
 struct ControllerInfo {
 	const char *controllerName;
 	ControllerState state;
-	PileNoeud* bestWay;
-	PileNoeud* charted;
+	list<Noeud*> bestWay;
+	list<Noeud*> charted;
 	Uint32 duration = 0;
 	int cout = 0;
 };
+
+// TODO : Poser un ratio d'effacit

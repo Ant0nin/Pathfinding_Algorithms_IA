@@ -200,7 +200,8 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 	SDL_SetRenderDrawColor(renderer, COLOR_CHEMINEMENT, 1);
 	if (info->state != ControllerState::IDLE) {
 
-		PileNoeud *bestWay = info->bestWay;
+		list<Noeud*> bestWay = info->bestWay;
+		list<Noeud*> charted = info->charted;
 		int currentIndex = 0;
 
 		Noeud *nodePrev;
@@ -223,15 +224,22 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 		// Affichage du bon chemin
 		SDL_SetRenderDrawColor(renderer, COLOR_ARRIVE, 1);
 
-		int i = 1;
-		vector<Noeud*> c = bestWay->getC();
-		while (i <c.size()) {
-			nodePrev = c.at(i - 1);
-			nodeSuiv = c.at(i);
+		list<Noeud*>::iterator it = bestWay.begin();
+		while (it != --bestWay.end()) {
+			nodePrev = *it;
+			it++;
+			nodeSuiv = *it;
 			TRACE_LINE
-			SDL_RenderPresent(renderer); // TODO
-			i++;
 		}
+
+		// Affichage du cheminement
+		/*list<Noeud*>::iterator it = charted.begin();
+		while (it != --charted.end()) {
+			nodePrev = *it;
+			it++;
+			nodeSuiv = *it;
+			TRACE_LINE
+		}*/
 
 	}
 }
