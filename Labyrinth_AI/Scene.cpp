@@ -234,11 +234,11 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 
 
 		// Affichage du cheminement
-		list<Noeud*>::iterator it  = charted.begin();
+		list<Noeud*>::iterator it  = --charted.end();
 		int r=0, g=0, b=0;
-		while (it != --charted.end()) {
+		while (it != charted.begin()) {
 			nodePrev = *it;
-			it++;
+			it--;
 			nodeSuiv = *it;
 
 			r = nodeSuiv->heur*13;
