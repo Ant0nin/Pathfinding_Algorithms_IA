@@ -4,6 +4,7 @@
 #include "PileNoeud.h"
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_image.h>
+#include<windows.h>
 #include <SDL2\SDL_ttf.h>
 
 #define PRINT_TEXT \
@@ -259,6 +260,9 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 			zone.h = tileHeight/2;
 			zone.w = tileWidth/2;
 			SDL_RenderFillRect(renderer, &zone);
+			SDL_RenderPresent(renderer);
+			Sleep(100);
+			
 
 		}
 

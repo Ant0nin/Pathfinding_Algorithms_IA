@@ -14,6 +14,7 @@
 #include <list>
 
 #include "Meilleurdabord.h"
+#include "PrioriteProche.h"
 #include "AEtoile.h"
 #include "CoutsUniform.h"
 
@@ -43,6 +44,7 @@ int main(int argc, int *argv) {
 	controllers.push_back(new Meilleurdabord(noeudInit, terrain, &op));
 	//controllers.push_back(new AEtoile(noeudInit, terrain, &op));
 	controllers.push_back(new CoutsUniform(noeudInit, terrain, &op));
+	controllers.push_back(new PrioriteProche(noeudInit, terrain, &op));
 	//TODO: Antonin ton fort
 	ControllerSelector *selector = new ControllerSelector(controllers);
 
