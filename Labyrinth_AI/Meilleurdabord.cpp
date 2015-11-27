@@ -29,7 +29,7 @@ Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direc
 }
 
 void Meilleurdabord::heuristique(Noeud* n) {
-	
+	//TODO : L'heuristique est completement fausse, pos->x et pos->y sont completement faux
 	SDL_Point *pos;
 	float distance = 0;
 	std::list<SDL_Point*>::iterator it;

@@ -7,7 +7,7 @@ Noeud::Noeud(SDL_Point pos, Noeud* pere)
 {
 	this->pos = pos;
 	parent = pere;
-	heur = calcHeur();
+	heur = 0;
 }
 
 Noeud* Noeud::successeur(Direction op)
