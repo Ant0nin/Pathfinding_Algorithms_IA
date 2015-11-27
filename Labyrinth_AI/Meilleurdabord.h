@@ -13,6 +13,9 @@
 
 class Meilleurdabord : public Controller {
 
+protected:
+	list<SDL_Point*> listExit;
+
 public :
 	Meilleurdabord(Noeud *etatInitial, Terrain *terrain, std::list<Direction> *op);
 	virtual void heuristique(Noeud *) override;

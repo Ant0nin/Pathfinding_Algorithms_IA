@@ -16,7 +16,8 @@ ControllerInfo * Controller::getInfo()
 
 void Controller::reset()
 {
-	// TODO
+	// TODO : reset
+	info.cout = 0;
 }
 
 bool Controller::isBut(Noeud* n) {
@@ -33,6 +34,8 @@ bool Controller::isValid(Noeud *n) {
 
 void Controller::execute()
 {
+	reset();
+
 	PileNoeud aExplo = PileNoeud();
 	PileNoeud dejaExplo = PileNoeud();
 	Noeud* curNoeud = NULL;

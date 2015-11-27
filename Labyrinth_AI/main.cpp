@@ -42,7 +42,7 @@ int main(int argc, int *argv) {
 	Noeud* noeudInit = new Noeud(*character.position);
 	controllers.push_back(new Meilleurdabord(noeudInit, terrain, &op));
 	//controllers.push_back(new AEtoile(noeudInit, terrain, &op));
-	//controllers.push_back(new CoutsUniform(noeudInit, terrain, &op));
+	controllers.push_back(new CoutsUniform(noeudInit, terrain, &op));
 	//TODO: Antonin ton fort
 	ControllerSelector *selector = new ControllerSelector(controllers);
 

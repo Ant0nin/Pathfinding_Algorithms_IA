@@ -1,6 +1,8 @@
 #include "Noeud.h"
 #include <cmath>
 
+// TODO : Ajouter un attribut niveau pour la couleur du chemin à l'affichage
+
 Noeud::Noeud(SDL_Point pos, Noeud* pere)
 {
 	this->pos = pos;

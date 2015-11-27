@@ -27,7 +27,7 @@ textSurface = TTF_RenderText_Blended_Wrapped(font, text, text_color, consoleWidt
 #define TRACE_LINE \
 nodePrevPos = nodePrev->getPosition(); \
 nodeSuivPos = nodeSuiv->getPosition(); \
-printf("%i %i --- %i %i\n", nodePrevPos.x, nodePrevPos.y, nodeSuivPos.x, nodeSuivPos.y); \
+printf("x %i, y %i, heur %i \n", nodePrevPos.x, nodePrevPos.y, nodePrev->heur); \
 SDL_RenderDrawLine(renderer, \
 	nodePrevPos.x * tileWidth + tileWidth / 2, \
 	nodePrevPos.y * tileHeight + tileHeight / 2, \
@@ -223,7 +223,6 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 
 		// Affichage du bon chemin
 		SDL_SetRenderDrawColor(renderer, COLOR_ARRIVE, 1);
-
 		list<Noeud*>::iterator it = bestWay.begin();
 		while (it != --bestWay.end()) {
 			nodePrev = *it;
@@ -232,14 +231,25 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 			TRACE_LINE
 		}
 
+
 		// Affichage du cheminement
-		/*list<Noeud*>::iterator it = charted.begin();
+		it = charted.begin();
 		while (it != --charted.end()) {
+			
 			nodePrev = *it;
 			it++;
 			nodeSuiv = *it;
-			TRACE_LINE
-		}*/
+
+			// TODO : transformer en macro
+			SDL_SetRenderDrawColor(renderer, nodeSuiv->heur * 10, 0, 0, 255);
+			SDL_Rect zone;
+			zone.x = nodeSuiv->getPosition().x * tileWidth + tileWidth / 2;
+			zone.y = nodeSuiv->getPosition().y * tileHeight + tileHeight / 2;
+			zone.h = tileHeight/4;
+			zone.w = tileWidth/4;
+			SDL_RenderFillRect(renderer, &zone);
+
+		}
 
 	}
 }
