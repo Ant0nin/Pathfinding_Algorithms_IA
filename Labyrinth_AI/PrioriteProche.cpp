@@ -14,5 +14,5 @@ PrioriteProche::PrioriteProche(Noeud* etatInitial, Terrain *ter, std::list<Direc
 
 void PrioriteProche::heuristique(Noeud* n) {
 	
-	n->heur = -1*sqrt(pow(n->getPosition().x - etatInitial->getPosition().x, 2) + pow(n->getPosition().y - etatInitial->getPosition().y, 2));
+	n->heur = -1*sqrt(pow( etatInitial->getPosition().x - n->getPosition().x, 2) + pow(etatInitial->getPosition().y - n->getPosition().y, 2));
 }

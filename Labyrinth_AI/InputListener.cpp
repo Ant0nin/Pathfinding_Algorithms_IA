@@ -20,6 +20,7 @@ void InputListener::run()
 
 	while (1) {
 
+		// TODO : Ne pas prendre en compte l'évènement si son déclenchement a eu lieu il y a longtemps
 		while (SDL_WaitEvent(&event)) {
 
 			switch (event.type) {
@@ -39,6 +40,10 @@ void InputListener::run()
 			case SDL_KEYDOWN:
 
 				switch (event.key.keysym.sym) {
+
+				case SDLK_n:
+					scene->switchAnimation();
+					break;
 
 				case SDLK_RIGHT: // Flèche droite
 				case SDLK_DOWN: // Flèche bas

@@ -22,6 +22,9 @@
 
 int main(int argc, int *argv) {
 
+	// TODO : Afficher le ratio nb coups / chemin plus court
+	// TODO : Avoir la possibilité de changer de niveau pdt l'exécution
+
 	TTF_Init();
 	SDL_Init(SDL_INIT_VIDEO);
 

@@ -222,17 +222,6 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 			currentIndex++;
 		}*/
 
-		// Affichage du bon chemin
-		/*SDL_SetRenderDrawColor(renderer, COLOR_ARRIVE, 1);
-		list<Noeud*>::iterator it = bestWay.begin();
-		while (it != --bestWay.end()) {
-			nodePrev = *it;
-			it++;
-			nodeSuiv = *it;
-			TRACE_LINE
-		}*/
-
-
 		// Affichage du cheminement
 		list<Noeud*>::iterator it  = --charted.end();
 		int r=0, g=0, b=0;
@@ -261,9 +250,20 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 			zone.w = tileWidth/2;
 			SDL_RenderFillRect(renderer, &zone);
 			SDL_RenderPresent(renderer);
-			Sleep(100);
 			
+			if(animation)
+				SDL_Delay(100);
 
+		}
+
+		// Affichage du bon chemin
+		SDL_SetRenderDrawColor(renderer, COLOR_ARRIVE, 1);
+		it = bestWay.begin();
+		while (it != --bestWay.end()) {
+			nodePrev = *it;
+			it++;
+			nodeSuiv = *it;
+			TRACE_LINE
 		}
 
 	}
@@ -279,4 +279,9 @@ void Scene::render()
 	preparePathTrace(winWidth, winHeight, tileWidth, tileHeight);
 
 	SDL_RenderPresent(renderer);
+}
+
+void Scene::switchAnimation()
+{
+	animation = !animation;
 }

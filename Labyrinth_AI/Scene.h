@@ -11,6 +11,8 @@ class Scene {
 
 private:
 
+	bool animation = true;
+
 	SDL_Renderer *renderer;
 	SDL_Window *window;
 
@@ -37,4 +39,6 @@ public:
 	Scene(Terrain *terrain, Character *character, ControllerSelector *selector);
 	~Scene();
 	void render();
+
+	void switchAnimation();
 };
