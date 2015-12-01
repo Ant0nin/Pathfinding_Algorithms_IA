@@ -13,7 +13,7 @@
 #define TEXTURE_FLOOR_UNIT		"res/tex/floor_unit.png"
 #define TEXTURE_EXIT_UNIT		"res/tex/exit_unit.png"
 
-#define LEVEL_NUMBER 001
+#define LEVEL_NUMBER 002
 
 #define COLOR_CHEMINEMENT	255,0,0
 #define COLOR_ARRIVE		0,0,255

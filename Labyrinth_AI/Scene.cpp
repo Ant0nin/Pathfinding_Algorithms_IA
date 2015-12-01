@@ -252,7 +252,7 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 			SDL_RenderPresent(renderer);
 			
 			if(animation)
-				SDL_Delay(100);
+				SDL_Delay(50);
 
 		}
 

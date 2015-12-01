@@ -7,7 +7,7 @@
 #include "Noeud.h"
 
 using namespace std;
-
+//TODO : Comparaison inversée
 struct ptr_less {
 	template<typename Noeud>
 	bool operator()(const Noeud& left, const Noeud& right) const {
