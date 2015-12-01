@@ -11,4 +11,7 @@ class AEtoile : public Controller {
 public:
 	AEtoile(Noeud * etatInitial, Terrain * ter, std::list<Direction>* op);
 	virtual void heuristique(Noeud *) override;
+
+protected:
+	list<SDL_Point> listExit;
 };

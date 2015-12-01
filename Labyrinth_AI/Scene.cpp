@@ -223,17 +223,6 @@ void Scene::preparePathTrace(int winWidth, int winHeight, int tileWidth, int til
 		SDL_Point nodePrevPos;
 		SDL_Point nodeSuivPos;
 
-		/*while (currentIndex < info->cheminement.size()) {
-
-			nodePrev = *it;
-
-			while (!controller->isStart(nodePrev)) {
-				TRACE_LINE
-			}
-
-			it = std::next(it);
-			currentIndex++;
-		}*/
 
 		// Affichage du cheminement
 		list<Noeud*>::iterator it  = --charted.end();

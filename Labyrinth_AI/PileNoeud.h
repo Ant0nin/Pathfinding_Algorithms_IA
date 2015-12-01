@@ -18,7 +18,7 @@ struct ptr_less {
 class PileNoeud : public priority_queue<Noeud*, vector<Noeud*>, ptr_less> {
 
 public:
-	
+
 	PileNoeud();
 	void empil(Noeud* n);
 	Noeud* depil();
@@ -29,5 +29,3 @@ public:
 	vector<Noeud*> getC();
 
 };
-
-

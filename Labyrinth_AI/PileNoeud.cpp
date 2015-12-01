@@ -8,7 +8,7 @@ PileNoeud::PileNoeud()
 {
 }
 
-void PileNoeud::empil(Noeud* n) {	
+void PileNoeud::empil(Noeud* n) {
 	this->push(n);
 }
 
@@ -31,7 +31,7 @@ bool comparHeur(const Noeud* first, const Noeud* second)
 
 void PileNoeud::join(PileNoeud listEnf) {
 	/*while (listEnf.pileNoeud.size() != 0) {
-		pileNoeud.push_front(listEnf.pileNoeud.pop_back());
+	pileNoeud.push_front(listEnf.pileNoeud.pop_back());
 	}*/
 }
 
@@ -44,7 +44,7 @@ bool PileNoeud::isIn(Noeud* noeud) {
 	/*bool ret = find(c.cbegin(), c.cend(), &noeud) != c.cend();
 	return ret;*/
 	bool ret = false;
-	int i=0,nX= noeud->getPosition().x,nY=noeud->getPosition().y;
+	int i = 0, nX = noeud->getPosition().x, nY = noeud->getPosition().y;
 	while (i<c.size()) {
 		if (c.at(i)->getPosition().x == nX && c.at(i)->getPosition().y == nY) ret = true;
 		i++;
@@ -57,4 +57,3 @@ vector<Noeud*> PileNoeud::getC()
 {
 	return c;
 }
-

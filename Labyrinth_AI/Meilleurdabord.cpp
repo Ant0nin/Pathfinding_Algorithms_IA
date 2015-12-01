@@ -18,7 +18,7 @@ Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direc
 		for (int i = 0; i < w; i++) {
 
 			if (ter->tiles[j * w + i] == Tile::EXIT) {
-				
+
 				SDL_Point p;
 				p.x = i;
 				p.y = j;
@@ -29,7 +29,6 @@ Meilleurdabord::Meilleurdabord(Noeud* etatInitial, Terrain *ter, std::list<Direc
 }
 
 void Meilleurdabord::heuristique(Noeud* n) {
-	//TODO : L'heuristique est completement fausse, pos->x et pos->y sont completement faux
 	SDL_Point pos;
 	float distance = 0;
 	std::list<SDL_Point>::iterator it;
@@ -43,5 +42,5 @@ void Meilleurdabord::heuristique(Noeud* n) {
 			distance = temp;
 		it++;
 	}
-	n->heur=-1*distance;
+	n->heur = -distance;
 }
