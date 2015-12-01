@@ -173,16 +173,29 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 	case SUCCESS:
 		memcpy_s(text, bufferLength, "SUCCESS", bufferLength);
 		PRINT_TEXT
-		FORMAT_TIME
+		/*FORMAT_TIME
+		PRINT_TEXT*/
+		CARRIAGE_RETURN
+
+		_itoa_s(info->charted.size()-1, text, 10);
 		PRINT_TEXT
-		// TODO : Afficher les chemins et temps d'execution
+		_itoa_s(info->bestWay.size(), text, 10);
+		PRINT_TEXT
+		CARRIAGE_RETURN
 		break;
 
 	case FAILED:
 		memcpy_s(text, bufferLength, "FAILED", bufferLength);
 		PRINT_TEXT
-		FORMAT_TIME
+		/*FORMAT_TIME
+		PRINT_TEXT*/
+		CARRIAGE_RETURN
+
+		_itoa_s(info->charted.size()-1, text, 10);
 		PRINT_TEXT
+		_itoa_s(info->bestWay.size(), text, 10);
+		PRINT_TEXT
+		CARRIAGE_RETURN
 		// TODO : Afficher temps d'execution
 		break;
 

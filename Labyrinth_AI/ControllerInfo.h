@@ -13,7 +13,6 @@ struct ControllerInfo {
 	list<Noeud*> bestWay;
 	list<Noeud*> charted;
 	Uint32 duration = 0;
-	int cout = 0;
 };
 
-// TODO : Poser un ratio d'effacit
+// TODO : Mesurer le temps en ms
