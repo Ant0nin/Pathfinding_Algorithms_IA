@@ -12,6 +12,6 @@ void CoutsUniform::heuristique(Noeud *n)
 	if (isStart(n))
 		n->heur = 0;
 	else {
-		n->heur = n->getParent()->heur + 1;
+		n->heur = n->getParent()->heur - 1;
 	}
 }

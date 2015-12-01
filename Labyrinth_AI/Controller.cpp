@@ -53,8 +53,8 @@ void Controller::execute()
 				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
 				//printf("		Enfant : %i / %i", curNoeudEnfant->getPosition(),it);
 				//printf("	Prejent : %d \n", dejaExplo.isIn(curNoeudEnfant));
+				heuristique(curNoeudEnfant);
 				if (isValid(curNoeudEnfant) && (!dejaExplo.isIn(curNoeudEnfant) && !aExplo.isIn(curNoeudEnfant))) {
-					heuristique(curNoeudEnfant);
 					//printf("		Enfant : %i / %i : %i\n", curNoeudEnfant->getPosition(), curNoeudEnfant->heur);
 					aExplo.empil(curNoeudEnfant);
 				}
