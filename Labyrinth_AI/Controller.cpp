@@ -17,7 +17,6 @@ ControllerInfo * Controller::getInfo()
 void Controller::reset()
 {
 	// TODO : reset
-	info.cout = 0;
 }
 
 bool Controller::isBut(Noeud* n) {
@@ -66,10 +65,7 @@ void Controller::execute()
 
 	info.bestWay = list<Noeud*>();
 	while (!isStart(curNoeud)) {
-		info.cout++;
 		info.bestWay.push_front(curNoeud);
 		curNoeud = curNoeud->getParent();
 	}
-
-	printf("Depart : %i / %i et heur : %d : %i/%i parcouru\n", curNoeud->getPosition(), info.cout, dejaExplo.size(), curNoeud->heur );
 }

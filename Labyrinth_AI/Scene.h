@@ -11,7 +11,7 @@ class Scene {
 
 private:
 
-	bool animation = true;
+	bool animation = false;
 
 	SDL_Renderer *renderer;
 	SDL_Window *window;
