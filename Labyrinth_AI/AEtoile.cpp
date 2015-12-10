@@ -46,6 +46,6 @@ void AEtoile::heuristique(Noeud* n) {
 			distExit = temp;
 		it++;
 	}
-	n->heur = -( 5*distExit+ n->g );
+	n->heur = -( distExit+ 5*n->g );
 }
 
