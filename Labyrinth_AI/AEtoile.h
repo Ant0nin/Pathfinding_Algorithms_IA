@@ -14,4 +14,6 @@ public:
 
 protected:
 	list<SDL_Point> listExit;
+	int poidsDepart = 1;
+	int poidsArrivee = 1;
 };

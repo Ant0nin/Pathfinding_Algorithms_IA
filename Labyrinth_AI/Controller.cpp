@@ -16,7 +16,10 @@ ControllerInfo * Controller::getInfo()
 
 void Controller::reset()
 {
-	// TODO : reset
+	info.state = ControllerState::IDLE;
+	info.bestWay = list<Noeud*>();
+	info.charted = list<Noeud*>();
+	info.duration = 0;
 }
 
 bool Controller::isBut(Noeud* n) {
@@ -34,6 +37,8 @@ bool Controller::isValid(Noeud *n) {
 void Controller::execute()
 {
 	reset();
+
+	Uint32 startTime = SDL_GetTicks();
 
 	PileNoeud aExplo = PileNoeud();
 	PileNoeud dejaExplo = PileNoeud();
@@ -61,6 +66,8 @@ void Controller::execute()
 		}
 	}
 
+
+
 	info.state = ControllerState::SUCCESS;
 
 	info.bestWay = list<Noeud*>();
@@ -68,4 +75,6 @@ void Controller::execute()
 		info.bestWay.push_front(curNoeud);
 		curNoeud = curNoeud->getParent();
 	}
+
+	info.duration = SDL_GetTicks() - startTime;
 }

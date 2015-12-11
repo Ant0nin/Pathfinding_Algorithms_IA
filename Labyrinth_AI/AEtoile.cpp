@@ -3,7 +3,7 @@
 using namespace std;
 
 AEtoile::AEtoile(Noeud * etatInitial, Terrain * ter, std::list<Direction>* op)
-	: Controller("A Star", etatInitial, ter, op)
+	: Controller("A Etoile (1,1)", etatInitial, ter, op)
 {
 
 	listExit = list<SDL_Point>();
@@ -46,6 +46,6 @@ void AEtoile::heuristique(Noeud* n) {
 			distExit = temp;
 		it++;
 	}
-	n->heur = -( distExit+ 5*n->g );
+	n->heur = -(poidsArrivee*distExit + poidsDepart*n->g );
 }
 

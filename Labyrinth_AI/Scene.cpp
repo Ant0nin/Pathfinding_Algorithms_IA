@@ -143,13 +143,13 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 
 	// TODO : Corriger les dimensions de la console
 	if (winWidth <= winHeight) {
-		lineZone.x = 0;
+		lineZone.x = 0 + 100; // bidouille
 		lineZone.y = winHeight - mapHeight;
 		lineZone.w = winWidth;
 		lineZone.h = winHeight - lineZone.y;
 	}
 	else {
-		lineZone.x = winWidth - mapWidth;
+		lineZone.x = winWidth - mapWidth + 100; // bidouille
 		lineZone.y = 0;
 		lineZone.w = consoleWidth;
 		lineZone.h = winHeight / fontHeight;
@@ -177,28 +177,39 @@ void Scene::prepareConsole(int winWidth, int winHeight, int mapWidth, int mapHei
 		PRINT_TEXT*/
 		CARRIAGE_RETURN
 
-		_itoa_s(info->charted.size()-1, text, 10);
+		_itoa_s(info->bestWay.size()-1, text, 10);
+		strcat_s(text, " / ");
+		char num[10];
+		_itoa_s(info->charted.size(), num, 10);
+		strcat_s(text, num);
 		PRINT_TEXT
-		_itoa_s(info->bestWay.size(), text, 10);
+		CARRIAGE_RETURN
+
+		_itoa_s(info->duration, text, 10);
+		strcat_s(text, " ms");
 		PRINT_TEXT
 		CARRIAGE_RETURN
 		break;
 
-	case FAILED:
+	/*case FAILED:
 		memcpy_s(text, bufferLength, "FAILED", bufferLength);
 		PRINT_TEXT
-		/*FORMAT_TIME
-		PRINT_TEXT*/
+		FORMAT_TIME
+		PRINT_TEXT
 		CARRIAGE_RETURN
 
 		_itoa_s(info->charted.size()-1, text, 10);
+
 		PRINT_TEXT
 		_itoa_s(info->bestWay.size(), text, 10);
 		PRINT_TEXT
 		CARRIAGE_RETURN
-		// TODO : Afficher temps d'execution
-		break;
 
+		_itoa_s(info->duration, text, 10);
+		strcat_s(text, " ms");
+		PRINT_TEXT
+		CARRIAGE_RETURN		
+		break;*/
 	}
 	this->texture_console = SDL_CreateTextureFromSurface(this->renderer, textSurface);
 	SDL_RenderCopy(renderer, texture_console, NULL, &lineZone);
