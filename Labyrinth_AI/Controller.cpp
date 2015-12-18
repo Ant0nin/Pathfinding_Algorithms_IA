@@ -49,24 +49,19 @@ void Controller::execute()
 		curNoeud = aExplo.depil();
 		dejaExplo.empil(curNoeud);
 		info.charted.push_front(curNoeud);
-		//printf("Le noeud est : %i / %i \n", curNoeud->getPosition());
+
 		if (isBut(curNoeud)) break;
 		else {
 			std::list<Direction>::iterator it = op->begin();
 			for (; it != op->end(); it++) {
 				Noeud* curNoeudEnfant = curNoeud->successeur(*it);
-				//printf("		Enfant : %i / %i", curNoeudEnfant->getPosition(),it);
-				//printf("	Prejent : %d \n", dejaExplo.isIn(curNoeudEnfant));
 				heuristique(curNoeudEnfant);
 				if (isValid(curNoeudEnfant) && (!dejaExplo.isIn(curNoeudEnfant) && !aExplo.isIn(curNoeudEnfant))) {
-					//printf("		Enfant : %i / %i : %i\n", curNoeudEnfant->getPosition(), curNoeudEnfant->heur);
 					aExplo.empil(curNoeudEnfant);
 				}
 			}
 		}
 	}
-
-
 
 	info.state = ControllerState::SUCCESS;
 
